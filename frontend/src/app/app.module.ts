@@ -1,40 +1,37 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ListComponent } from './patient/list/list.component';
 import { Routes, RouterModule } from '@angular/router';
-import { CreateComponent } from './patient/create/create.component';
-import { UpdateComponent } from './patient/update/update.component';
-import { FormGroup, FormBuilder, Validators, FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './admin/login/login.component';
+import { LoginDoctorComponent } from './doctor/login-doctor/login-doctor.component';
+import { LoginSecretaryComponent } from './secretary/login-secretary/login-secretary.component';
+
 
 const appRoutes: Routes = [
-  { path: 'patientsList', component: ListComponent },
-  { path : 'updatePatient/:id' , component : UpdateComponent},
-  { path : 'createPatient' , component : CreateComponent}
+  { path: '', component: AppComponent },
+  { path: 'admin', component: LoginComponent },
+  { path : 'doctor' , component : LoginDoctorComponent },
+  { path : 'secretary' , component : LoginSecretaryComponent }
 ];
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    ListComponent,
-    CreateComponent,
-    UpdateComponent
+    LoginComponent,
+    LoginDoctorComponent,
+    LoginSecretaryComponent
   ],
   imports: [
-    RouterModule.forRoot(appRoutes),
     BrowserModule,
-    HttpClientModule,
     AppRoutingModule,
-    ReactiveFormsModule,
-    FormsModule,
-   
+    RouterModule.forRoot(appRoutes),
+    HttpClientModule,
     
   ],
-  providers: [
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
