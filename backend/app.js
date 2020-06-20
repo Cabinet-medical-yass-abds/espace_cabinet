@@ -11,7 +11,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 //database config
-mongoose.connect('mongodb://localhost:27017/cabinet', { useNewUrlParser: true ,useUnifiedTopology: true});
+mongoose.connect('mongodb://localhost:27017/medical', { useNewUrlParser: true ,useUnifiedTopology: true});
 let db = mongoose.connection ;
 // db connection verification (open)
 db.once('open', () => {
@@ -26,14 +26,18 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 
 //init routes
-var routes = require('./routes/patient')
+var adminroutes = require('./routes/admin')
+var doctorroutes = require('./routes/doctor')
+var secretroutes = require('./routes/secretary')
+app.use('/admin',adminroutes)
+app.use('/doctor',doctorroutes)
+app.use('/secretary', secretroutes )
 
 
 //******************** main route ***************************************/
 app.get('/',(req,res)=>{
     res.send('backend worked !!')
 })
-app.use('/' , routes)
 
 
 // server 
