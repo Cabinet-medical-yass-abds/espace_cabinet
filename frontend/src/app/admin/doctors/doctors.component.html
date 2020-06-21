@@ -1,0 +1,66 @@
+<div class="container mt-2">
+    <div class="search-hero">
+        <input class="form-control" type="text" name="search" [(ngModel)]="searchDoctor" autocomplete="off" placeholder="Chercher un docteur par son nom, adresse, spécialité . . .">
+    </div>
+    <!-- List all doctors -->
+    <div class="row">
+        <div class="col-md-3 col-sm-6 item" *ngFor="let doctor of ad | filter:searchDoctor" data-toggle="modal" data-target="#DoctorModal" (click)='doctorInfos(doctor)'>
+            <div class="card item-card card-block">
+                <img src="assets/doctor-default.png" alt="Photo of sunset">
+                <h5 class="item-card-title mt-3 mb-3">Dr. {{doctor.name}} {{doctor.fname}}</h5>
+                <p class="card-text">{{doctor.bio | slice:0:100}}{{ doctor.bio.length > 100 ? ' ...' : '' }}</p>
+            </div>
+        </div>
+        <!-- No Doctors found -->
+        <div *ngIf="!( ad | filter:searchDoctor)?.length && !emptyBool">
+            <div id="notfound">
+                <div class="notfound">
+                    <div class="notfound-404"></div>
+                    <h1>404</h1>
+                    <h2>Oops! Pas de docteurs</h2>
+                    <a href="admin/doctors">Afficher tous les docteurs</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="jumbotron jumbotron-fluid mt-5" *ngIf="!ad?.length">
+        <div class=" container ">
+            <h1 class="display-4 ">Vous n'avez pas de docteurs</h1>
+            <p class="lead ">Vous pouvez ajouter un nouveau docteur.</p>
+        </div>
+    </div>
+    <!-- List all doctors -->
+    <!-- Modal -->
+    <div class="modal fade" id="DoctorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle ">DR {{d_name | uppercase}} {{d_fname | uppercase}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><i class="fa fa-map-o" aria-hidden="true "></i>&nbsp;<b>Adresse : </b>{{d_adress}}</li>
+                        <li class="list-group-item"><i class="fa fa fa-envelope-o" aria-hidden="true "></i>&nbsp;<b>Email : </b>{{d_email}}</li>
+                        <li class="list-group-item"><i class="fa fa-venus-mars" aria-hidden="true "></i>&nbsp;<b>Sexe : </b>{{d_sex}}</li>
+                        <li class="list-group-item"><i class="fa fa-medkit" aria-hidden="true "></i>&nbsp;<b>Spécialité : </b>{{d_spec}}</li>
+                    </ul>
+                    <div class="text-center mt-2 mb-3">
+                        <h4>BIO</h4>
+                    </div>
+                    <div class="card border-light">
+                        <div class="card-body">
+                            <samp>{{d_bio}}</samp>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" (click)='deleteD(d_id)' data-dismiss="modal">Supprimer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal -->
+</div>
