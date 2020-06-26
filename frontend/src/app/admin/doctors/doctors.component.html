@@ -4,14 +4,188 @@
     </div>
     <!-- List all doctors -->
     <div class="row">
-        <div class="col-md-3 col-sm-6 item" *ngFor="let doctor of ad | filter:searchDoctor" data-toggle="modal" data-target="#DoctorModal" (click)='doctorInfos(doctor)'>
-            <div class="card item-card card-block">
-                <img src="assets/doctor-default.png" alt="Photo of sunset">
-                <h5 class="item-card-title mt-3 mb-3">Dr. {{doctor.name}} {{doctor.fname}}</h5>
-                <p class="card-text">{{doctor.bio | slice:0:100}}{{ doctor.bio.length > 100 ? ' ...' : '' }}</p>
+        <div class="col-md-3 col-sm-6 item" *ngIf="( ad | filter:searchDoctor)?.length || !ad?.length">
+            <div class="card item-card card-block" data-toggle="modal" data-target="#AddDoctor">
+                <img src="assets/add2.png" alt="Photo of sunset" class="add-img">
             </div>
         </div>
-        <!-- No Doctors found -->
+        <div class="col-md-3 col-sm-6 item" *ngFor="let doctor of ad | filter:searchDoctor">
+            <div class="card item-card card-block" data-toggle="modal" data-target="#DoctorModal">
+                <img src="assets/doctor-default.png" alt="Photo of sunset">
+                <h5 class="item-card-title mt-3 mb-3">Dr. {{doctor.id_user.nom}} {{doctor.id_user.prenom}}</h5>
+                <p class="card-text">{{doctor.bio | slice:0:100}}{{ doctor.bio.length > 100 ? ' ...' : '' }}</p>
+            </div>
+            <!-- Modal Doctor BIO -->
+            <div class="modal fade" id="DoctorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle ">DR {{doctor.id_user.nom | uppercase}} {{doctor.id_user.prenom | uppercase}}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><i class="fa fa-map-o" aria-hidden="true "></i>&nbsp;<b>Adresse : </b>{{doctor.adress.city}} ,{{doctor.adress.street}}, {{doctor.adress.zip}}</li>
+                                <li class="list-group-item"><i class="fa fa fa-envelope-o" aria-hidden="true "></i>&nbsp;<b>Email : </b>{{doctor.id_user.email}}</li>
+                                <li class="list-group-item"><i class="fa fa-venus-mars" aria-hidden="true "></i>&nbsp;<b>Sexe : </b>{{ doctor.man ? 'Homme' : 'Femme' }}</li>
+                                <li class="list-group-item"><i class="fa fa-medkit" aria-hidden="true "></i>&nbsp;<b>Spécialité : </b>{{doctor.spec}}</li>
+                            </ul>
+                            <div class="text-center mt-2 mb-3">
+                                <h4>BIO</h4>
+                            </div>
+                            <div class="card border-light">
+                                <div class="card-body">
+                                    <samp>{{doctor.bio}}</samp>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-info updateDoctor" data-toggle="modal" data-target="#AddDoctor" data-dismiss="modal" (click)='updateDoctor(doctor)'>Modifier</button>
+                            <button type="button" class="btn btn-danger" (click)='deleteD(doctor._id)' data-dismiss="modal">Supprimer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Modal Doctor BIO -->
+        </div>
+        <!-- Modal Add Doctor -->
+        <div class="modal fade" id="AddDoctor" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate *ngIf="!modify; else elseBlock">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Ajouter docteur</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="border-light">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Nom</label>
+                                        <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrer nom docteur" name="name" ngModel>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Prénom</label>
+                                        <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrer prénom docteur" name="fname" ngModel>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="sexe">Sexe:</label>
+                                        <select name="sexe" id="sexe" class="form-control" ngModel>
+                                  <option value="true">Homme</option>
+                                  <option value="false">Femme</option>
+                              </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Spécialité</label>
+                                        <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrer spécialité docteur" name="spec" ngModel>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">City</label>
+                                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enterer city docteur" name="city" ngModel>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Street</label>
+                                        <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrer street docteur" name="street" ngModel>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">zip code</label>
+                                        <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrer zip docteur" name="zip" ngModel>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Email</label>
+                                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrer email docteur" name="email" ngModel>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Mot de passe</label>
+                                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" ngModel>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Bio</label>
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="bio" ngModel></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">Ajouter</button>
+                        </div>
+                    </form>
+                    <ng-template #elseBlock>
+                        <form #f="ngForm" (ngSubmit)="onUpdate(f,doctor)" novalidate>
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Modifier docteur</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="border-light">
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Nom</label>
+                                            <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrer nom docteur" name="name" ngModel *ngIf="!modify; else elseBlock2">
+                                            <ng-template #elseBlock2>
+                                                <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrer nom docteur" name="name" [(ngModel)]="doctor.id_user.nom">
+                                            </ng-template>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Prénom</label>
+                                            <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrer prénom docteur" name="fname" [(ngModel)]="doctor.id_user.prenom">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="sexe">Sexe:</label>
+                                            <select name="sexe" id="sexe" class="form-control" [(ngModel)]="doctor.man">
+                                            <option value="true" selected>Homme</option>
+                                            <option value="false">Femme</option>
+                                          </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Spécialité</label>
+                                            <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrer spécialité docteur" name="spec" [(ngModel)]="doctor.spec">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">City</label>
+                                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enterer city docteur" name="city" [(ngModel)]="doctor.adress.city">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Street</label>
+                                            <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrer street docteur" name="street" [(ngModel)]="doctor.adress.street">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">zip code</label>
+                                            <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrer zip docteur" name="zip" [(ngModel)]="doctor.adress.zip">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Email</label>
+                                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrer email docteur" name="email" [(ngModel)]="doctor.id_user.email">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Mot de passe</label>
+                                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" [(ngModel)]="doctor.id_user.password">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Bio</label>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="bio" [(ngModel)]="doctor.bio"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success">Modifier</button>
+                            </div>
+                        </form>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+        <!-- End Modal Add Doctor -->
+        <!-- Doctors not found -->
         <div *ngIf="!( ad | filter:searchDoctor)?.length && !emptyBool">
             <div id="notfound">
                 <div class="notfound">
@@ -22,6 +196,7 @@
                 </div>
             </div>
         </div>
+        <!-- End Doctors not found -->
     </div>
     <div class="jumbotron jumbotron-fluid mt-5" *ngIf="!ad?.length">
         <div class=" container ">
@@ -29,38 +204,5 @@
             <p class="lead ">Vous pouvez ajouter un nouveau docteur.</p>
         </div>
     </div>
-    <!-- List all doctors -->
-    <!-- Modal -->
-    <div class="modal fade" id="DoctorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle ">DR {{d_name | uppercase}} {{d_fname | uppercase}}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-                </div>
-                <div class="modal-body">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><i class="fa fa-map-o" aria-hidden="true "></i>&nbsp;<b>Adresse : </b>{{d_adress}}</li>
-                        <li class="list-group-item"><i class="fa fa fa-envelope-o" aria-hidden="true "></i>&nbsp;<b>Email : </b>{{d_email}}</li>
-                        <li class="list-group-item"><i class="fa fa-venus-mars" aria-hidden="true "></i>&nbsp;<b>Sexe : </b>{{d_sex}}</li>
-                        <li class="list-group-item"><i class="fa fa-medkit" aria-hidden="true "></i>&nbsp;<b>Spécialité : </b>{{d_spec}}</li>
-                    </ul>
-                    <div class="text-center mt-2 mb-3">
-                        <h4>BIO</h4>
-                    </div>
-                    <div class="card border-light">
-                        <div class="card-body">
-                            <samp>{{d_bio}}</samp>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" (click)='deleteD(d_id)' data-dismiss="modal">Supprimer</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Modal -->
+    <!-- End List all doctors -->
 </div>

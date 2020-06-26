@@ -3,6 +3,14 @@ img {
     width: 100%;
 }
 
+.row {
+    margin: 0px !important;
+}
+
+.add-img {
+    height: 400px;
+}
+
 .item {
     padding-left: 5px;
     padding-right: 5px;
@@ -69,8 +77,8 @@ img {
 
 #notfound .notfound {
     position: absolute;
-    left: 71%;
-    top: 45%;
+    left: 60%;
+    top: 35%;
     -webkit-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);

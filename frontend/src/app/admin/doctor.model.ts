@@ -1,15 +1,13 @@
 export interface doctor {
-  name: String ,
-  fname :String,
-  email: String,
   spec: String,
-  adress : {
-      street : String ,
-      city : String ,
-      zip : String
-  } ,
-  password : String,
-  man : {type:Boolean, required : true },
-  bio : String,
-  id_secrt : String
+  adress: {
+      street: String,
+      city: String,
+      zip: String
+  },
+  man: { type: Boolean, required: true },
+  bio: String,
+  phone: String,
+  id_secrt: String,
+  id_user: String
 }

@@ -17,4 +17,12 @@ export class AdminService {
     console.log('id doctor service',id);
     return this.http.get(`${this.url}/delete/`+id);
   }
+
+  addDoctor(object) {
+    return this.http.post(`${this.url}/addOne`,object);
+  }
+
+  updateDoctor(doctor) {
+    return this.http.post(`${this.url}/update/`+doctor.id_user._id,doctor);
+  }
 }

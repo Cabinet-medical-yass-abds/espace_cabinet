@@ -4,20 +4,22 @@ const Schema = mongoose.Schema;
 
 // doctor Schema
 const doctorSchema = new Schema({
-    name: String ,
-    fname :String,
-    email: {type : String , required : true},
     spec: String,
-    adress : {
-        street : String ,
-        city : String ,
-        zip : String
-    } ,
-    password : String,
-    man : {type:Boolean, required : true },
-    bio : String,
-    id_secrt : {
-        type: Schema.Types.ObjectId, ref: 'secrt'
+    adress: {
+        street: String,
+        city: String,
+        zip: String
+    },
+    man: { type: Boolean, required: true },
+    bio: String,
+    phone: String,
+    id_secrt: {
+        type: Schema.Types.ObjectId,
+        ref: 'secrt'
+    },
+    id_user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
     }
 }, { timestamps: true });
 

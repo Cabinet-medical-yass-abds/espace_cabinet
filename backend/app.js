@@ -11,14 +11,14 @@ app.use(cors());
 app.use(bodyParser.json());
 
 //database config
-mongoose.connect('mongodb://localhost:27017/medical', { useNewUrlParser: true ,useUnifiedTopology: true});
-let db = mongoose.connection ;
+mongoose.connect('mongodb://localhost:27017/medical', { useNewUrlParser: true, useUnifiedTopology: true });
+let db = mongoose.connection;
 // db connection verification (open)
 db.once('open', () => {
     console.log('connected to mongodb')
 });
 // db connection verification (err)
-db.on('error' , (err) => {
+db.on('error', (err) => {
     console.log('error')
 });
 mongoose.set('useNewUrlParser', true);
@@ -29,18 +29,18 @@ mongoose.set('useCreateIndex', true);
 var adminroutes = require('./routes/admin')
 var doctorroutes = require('./routes/doctor')
 var secretroutes = require('./routes/secretary')
-app.use('/admin',adminroutes)
-app.use('/doctor',doctorroutes)
-app.use('/secretary', secretroutes )
+app.use('/admin', adminroutes)
+app.use('/doctor', doctorroutes)
+app.use('/secretary', secretroutes)
 
 
 //******************** main route ***************************************/
-app.get('/',(req,res)=>{
+app.get('/', (req, res) => {
     res.send('backend worked !!')
 })
 
 
 // server 
-app.listen(3000, function () {
+app.listen(3000, function() {
     console.log('Example app listening on port 3000!')
 })

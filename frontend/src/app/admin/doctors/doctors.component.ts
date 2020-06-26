@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { doctor } from '../doctor.model';
 import { AdminService } from '../admin.service';
+import {NgForm} from '@angular/forms';
+declare var $: any;
 
 @Component({
   selector: 'app-doctors',
@@ -12,20 +14,12 @@ export class DoctorsComponent implements OnInit {
   constructor(private admin:AdminService) {}
 
   ad : doctor [];
-  filteredDoctors: doctor[] = [];
+  doctor;
   searchDoctor;
   emptyBool;
+  modify = false;
+  doc_id;
 
-  d_name;
-  d_fname;
-  d_bio;
-  d_adress;
-  d_email;
-  d_sex;
-  d_spec;
-  doctors;
-  d_id;
-  
   ngOnInit(): void {
     this.loadAllDoctors();
   }
@@ -42,17 +36,6 @@ export class DoctorsComponent implements OnInit {
     })
   }
 
-  // Get Doctor informations
-  doctorInfos(doctor) {
-    this.d_name = doctor.name;
-    this.d_fname = doctor.fname;
-    this.d_bio = doctor.bio;
-    this.d_adress = doctor.adress.city+', '+doctor.adress.street+', '+doctor.adress.zip;
-    this.d_email = doctor.email;
-    this.d_sex = doctor.man ? 'Homme' : 'Femme';
-    this.d_spec = doctor.spec;
-    this.d_id = doctor._id;
-  }
 
   // Delete doctor by id
   deleteD(id) {
@@ -60,4 +43,51 @@ export class DoctorsComponent implements OnInit {
       this.loadAllDoctors();
     })
   }
+
+  // Add doctor
+  onSubmit(f: NgForm) {
+    console.log(f.value); 
+    console.log(f.valid);
+    f.value.man = f.value.sexe;
+    f.value.adress = {
+      city : f.value.city,
+      street : f.value.street,
+      zip : f.value.zip
+    }
+    this.admin.addDoctor(f.value).subscribe(() => {
+      this.loadAllDoctors();
+    })
+  }
+
+  // Update doctor
+  onUpdate(f: NgForm,doctor) {
+    console.log('doctor last:',doctor);
+    f.value.adress = {
+      city : f.value.city,
+      street : f.value.street,
+      zip : f.value.zip
+    }
+    f.value.man = f.value.sexe;
+    delete f.value.city;
+    delete f.value.street;
+    delete f.value.zip;
+    delete f.value.sexe;
+    delete f.value._id;
+    this.admin.updateDoctor(doctor).subscribe(() => {
+      this.loadAllDoctors();
+    })
+  }
+
+  updateDoctor(doctor) {
+    console.log('doctor:',doctor);
+    this.doc_id = doctor._id;
+    this.doctor = doctor;
+    console.log('doctor:',this.doctor);
+    $('#AddDoctor').css({
+      'overflow-x': 'hidden',
+      'overflow-y': 'auto'
+    })
+    this.modify = true;
+  }
+
 }
