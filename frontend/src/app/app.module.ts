@@ -13,6 +13,7 @@ import { DoctorsComponent } from './admin/doctors/doctors.component';
 import { FormsModule } from '@angular/forms';
 // search module
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { SecretariesComponent } from './admin/secretaries/secretaries.component';
 
 const appRoutes: Routes = [
   { path: '', component: LandingComponent },
@@ -23,8 +24,12 @@ const appRoutes: Routes = [
         component: DashboardComponent // child route component that the router renders
       },
       {
-        path: 'doctors', // child route path
-        component: DoctorsComponent // child route component that the router renders
+        path: 'doctors', 
+        component: DoctorsComponent
+      },
+      {
+        path: 'secretaries', 
+        component: SecretariesComponent
       },
     ]
   },
@@ -41,7 +46,8 @@ const appRoutes: Routes = [
     LandingComponent,
     DashboardComponent,
     LayoutComponent,
-    DoctorsComponent
+    DoctorsComponent,
+    SecretariesComponent
   ],
   imports: [
     BrowserModule,

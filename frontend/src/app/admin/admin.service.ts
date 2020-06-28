@@ -9,6 +9,7 @@ export class AdminService {
   constructor(private http:HttpClient) { }
   url = 'http://localhost:3000/admin';
 
+  // Doctors 
   getAlldoctors() {
     return this.http.get(`${this.url}/listAll`);
   }
@@ -25,4 +26,20 @@ export class AdminService {
   updateDoctor(doctor) {
     return this.http.post(`${this.url}/update/`+doctor.id_user._id,doctor);
   }
+
+  // Secretaries
+  getAllSecretaries() {
+    return this.http.get(`${this.url}/listAllSecretaries`);
+  }
+
+  addSecretary(secretary) {
+    return this.http.post(`${this.url}/addOneSecretary`,secretary);
+  }
+  deleteSecretary(id) {
+    return this.http.get(`${this.url}/deleteSec/`+id);
+  }
+  updateSecretary(secretary) {
+    return this.http.post(`${this.url}/updateSec/`+secretary.id_user._id,secretary);
+  }
+
 }

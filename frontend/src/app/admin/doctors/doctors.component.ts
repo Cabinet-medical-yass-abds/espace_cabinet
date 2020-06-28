@@ -47,15 +47,9 @@ export class DoctorsComponent implements OnInit {
   // Add doctor
   onSubmit(f: NgForm) {
     console.log(f.value); 
-    console.log(f.valid);
-    f.value.man = f.value.sexe;
-    f.value.adress = {
-      city : f.value.city,
-      street : f.value.street,
-      zip : f.value.zip
-    }
     this.admin.addDoctor(f.value).subscribe(() => {
       this.loadAllDoctors();
+      $('#AddDoctor').modal('hide');
     })
   }
 
@@ -75,6 +69,7 @@ export class DoctorsComponent implements OnInit {
     delete f.value._id;
     this.admin.updateDoctor(doctor).subscribe(() => {
       this.loadAllDoctors();
+      $('#AddDoctor').modal('hide');
     })
   }
 
