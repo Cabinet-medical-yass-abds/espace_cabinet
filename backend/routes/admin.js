@@ -25,6 +25,8 @@ router.post('/addOne', (req, res) => {
   req.body.role = {
     isDoctor : true
   };
+  req.body.id_secrt = req.body.secretaire;
+  delete req.body.secretaire;
   delete req.body.name;
   delete req.body.fname;
   delete req.body.city;

@@ -75,9 +75,9 @@
                                     <div class="form-group">
                                         <label for="sexe">Sexe:</label>
                                         <select name="sexe" id="sexe" class="form-control" ngModel>
-                                  <option value="true">Homme</option>
-                                  <option value="false">Femme</option>
-                              </select>
+                                          <option value="true">Homme</option>
+                                          <option value="false">Femme</option>
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Spécialité</label>
@@ -104,6 +104,12 @@
                                         <label for="exampleInputPassword1">Mot de passe</label>
                                         <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" ngModel>
                                     </div>
+                                     <div class="form-group" *ngIf="secretaries?.length">
+                                        <label for="secretaire">Selectionner secretaire:</label>
+                                        <select name="secretaire" id="secretaire" class="form-control" ngModel>
+                                          <option value="{{sec.id_user._id}}" *ngFor="let sec of secretaries">{{sec.id_user.nom}} {{sec.id_user.prenom}}</option>
+                                        </select>
+                                      </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Bio</label>
                                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="bio" ngModel></textarea>
@@ -140,7 +146,7 @@
                                         <div class="form-group">
                                             <label for="sexe">Sexe:</label>
                                             <select name="sexe" id="sexe" class="form-control" [(ngModel)]="doctor.man">
-                                            <option value="true" selected>Homme</option>
+                                            <option value="true">Homme</option>
                                             <option value="false">Femme</option>
                                           </select>
                                         </div>
@@ -168,6 +174,13 @@
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Mot de passe</label>
                                             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" [(ngModel)]="doctor.id_user.password">
+                                        </div>
+                                        <div class="form-group">
+                                          <label for="secretaire">Selectionner secretaire:</label>
+                                          <select name="secretaire" id="sexe" class="form-control" ngModel>
+                                            <option value="none" selected>test1</option>
+                                            <option value="false">test2</option>
+                                          </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Bio</label>

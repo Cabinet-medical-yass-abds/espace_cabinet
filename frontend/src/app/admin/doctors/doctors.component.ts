@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { doctor } from '../doctor.model';
 import { AdminService } from '../admin.service';
 import {NgForm} from '@angular/forms';
+import { secretary } from 'src/app/secretary.model';
 declare var $: any;
 
 @Component({
@@ -14,6 +15,7 @@ export class DoctorsComponent implements OnInit {
   constructor(private admin:AdminService) {}
 
   ad : doctor [];
+  secretaries : secretary [];
   doctor;
   searchDoctor;
   emptyBool;
@@ -22,6 +24,7 @@ export class DoctorsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadAllDoctors();
+    this.loadAllSecretaries();
   }
   // Load all doctors
   loadAllDoctors() {
@@ -33,6 +36,14 @@ export class DoctorsComponent implements OnInit {
       }else{
         this.emptyBool = true;
       }
+    })
+  }
+
+  // Load all secretaries
+  loadAllSecretaries() {
+    this.admin.getAllSecretaries().subscribe((data: secretary []) => {
+      this.secretaries = data;
+      console.log('secretaries:',data);
     })
   }
 

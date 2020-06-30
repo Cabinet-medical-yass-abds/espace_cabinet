@@ -39,6 +39,8 @@ export class SecretariesComponent implements OnInit {
     console.log(f.value);
     f.value.nom = f.value.name;
     f.value.prenom = f.value.fname;
+    delete f.value.fname;
+    delete f.value.name;
     this.admin.addSecretary(f.value).subscribe(() => {
       this.loadAllSecretaries();
       $('#addSecretary').modal('hide');
