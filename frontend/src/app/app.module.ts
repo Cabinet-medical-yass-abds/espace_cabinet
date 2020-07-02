@@ -4,16 +4,25 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginDoctorComponent } from './doctor/login-doctor/login-doctor.component';
+import { FormsModule } from '@angular/forms';
 import { LoginSecretaryComponent } from './secretary/login-secretary/login-secretary.component';
+
+// search module
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
+import { SecretariesComponent } from './admin/secretaries/secretaries.component';
+
+// Admin Imports 
 import { LandingComponent } from './landing/landing.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { LayoutComponent } from './admin/layout/layout.component';
 import { DoctorsComponent } from './admin/doctors/doctors.component';
-import { FormsModule } from '@angular/forms';
-// search module
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { SecretariesComponent } from './admin/secretaries/secretaries.component';
+
+// Doctor Imports 
+import { LayoutDoctorComponent } from './doctor/layout/layout.component';
+import { HomeComponent } from './doctor/home/home.component';
+import { LoginDoctorComponent } from './doctor/login-doctor/login-doctor.component';
+import { SecretariesDoctorComponent } from './doctor/secretaries/secretaries.component';
 
 const appRoutes: Routes = [
   { path: '', component: LandingComponent },
@@ -33,7 +42,18 @@ const appRoutes: Routes = [
       },
     ]
   },
-  { path : 'doctor' , component : LoginDoctorComponent },
+  { path : 'doctor' , component : LayoutDoctorComponent,
+    children: [
+      {
+        path: 'home/:id',
+        component: HomeComponent
+      },
+      {
+        path: 'secretaries/:id',
+        component: SecretariesDoctorComponent
+      }
+    ]
+  },
   { path : 'secretary' , component : LoginSecretaryComponent }
 ];
 
@@ -47,7 +67,10 @@ const appRoutes: Routes = [
     DashboardComponent,
     LayoutComponent,
     DoctorsComponent,
-    SecretariesComponent
+    SecretariesComponent,
+    HomeComponent,
+    LayoutDoctorComponent,
+    SecretariesDoctorComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { secretary } from '../../secretary.model';
+import {NgForm} from '@angular/forms';
+declare var $: any;
+
 
 @Component({
   selector: 'app-login-doctor',

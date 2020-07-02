@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { doctor } from '../doctor.model';
+import { doctor } from '../../doctor.model';
 import { AdminService } from '../admin.service';
 import {NgForm} from '@angular/forms';
 import { secretary } from 'src/app/secretary.model';
