@@ -2,13 +2,22 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 
-// patient Schema
+
+// doctor Schema
 const patientSchema = new Schema({
-    nom : String,
-    prenom : String ,
-    email: { type: String, unique: true, lowercase: true },
-    password: String,
+    adress: {
+        street: String,
+        city: String,
+        zip: String
+    },
+    numtel :String,
+    man: { type: Boolean ,default :true },
+    id_user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    }
 }, { timestamps: true });
 
 
-module.exports = mongoose.model('Patient', patientSchema);
+
+module.exports = mongoose.model('patient', patientSchema);
