@@ -1,20 +1,101 @@
 const router = require('express').Router();
 const doctor = require('../models/doctor');
 const secretere = require('../models/secretere');
-const patient = require('../models/patient')
 const user = require('../models/user');
+const claim = require('../models/claim')
 
-// Doctors crud
+//////////////////////////////////////////////////////////// Doctors crud
 router.get('/listAll', (req, res) => {
   doctor.find({}, (err, results) => {
     if (err) { console.log(err) } else {
+      console.log(results)
+      res.json(results)
+    }
+  }).populate('id_secrt')
+})
+
+router.get('/delete/:id', (req, res,) => {
+  doctor.findByIdAndDelete({_id : req.params.id},(err)=>{
+    if (err) {
+      console.log(err)
+    }else{
+      res.json('Doctor removed !!')
+    }
+  })
+})
+// End Doctors crud
+
+
+////////////////////////////////////////////////////////// Secretary crud
+router.get('/listAllSecretaries', (req, res) => {
+  secretere.find({}, (err, results) => {
+    if (err) { console.log(err) } 
+    else {
+      res.json(results)
+    }
+  }).populate('id_doctor');
+})
+
+
+router.get('/deleteSec/:id', (req, res,next) => {
+  secretere.findByIdAndDelete({_id : req.params.id},(err)=>{
+    if (err) {
+      console.log(err)
+    }else{
+      res.json('Doctor removed !!')
+    }
+  })
+})
+
+/////////////////////////////////////////////////////////////patient crud
+router.get('/listpatient',(req,res)=>{
+    user.find({},(err,results)=>{
+      if (err) {
+        console.log(err)
+      }else{
+        res.json(results)
+      }
+    })
+})
+
+//////////////////////////////////////////////////////////// Reclamations crud
+router.get('/listclaim',(req,res)=>{
+  claim.find({},(err,results)=>{
+    if (err) {
+      console.log(err)
+    }else{
       res.json(results)
     }
   })
 })
 
+router.post('answerclaim/:id',(req,res)=>{
+  claim.findByIdAndUpdate({_id : req.params.id},{answer : req.body.answer},(err)=>{
+    if (err) {
+      console.log(err)
+    }else{
+      res.json('claim answered !!')
+    }
+  })
+})
 
-router.post('/addOne', (req, res) => {
+router.get('/deleteclaim/:id', (req, res,next) => {
+  claim.findByIdAndDelete({_id : req.params.id},(err)=>{
+    if (err) {
+      console.log(err)
+    }else{
+      res.json('claim deleted !!')
+    }
+  })
+})
+
+module.exports = router;
+
+
+
+
+
+/* router.post('/addOne', (req, res) => {
   var doc = new doctor({
     nom : req.body.nom,
     prenom : req.body.prenom,
@@ -33,7 +114,7 @@ router.post('/addOne', (req, res) => {
   })
   doc.save((err)=>{
     if(err){console.log(err)}
-    else{res.status(200).json('doctor added')}
+    else{res.json('doctor added')}
   })
 })
 
@@ -60,29 +141,9 @@ router.post('/update/:id', (req, res, next) => {
       })
     }
   });
-});
+}); */
 
-router.get('/delete/:id', (req, res,) => {
-  doctor.findByIdAndDelete({_id : req.params.id},(err)=>{
-    if (err) {
-
-    }else{
-      res.status(200).json('Doctor removed !!')
-    }
-  })
-})
-// End Doctors crud
-
-// Secretary crud
-router.get('/listAllSecretaries', (req, res) => {
-  secretere.find({}, (err, results) => {
-    if (err) { console.log(err) } else {
-      res.json(results)
-    }
-  }).populate('id_user');
-})
-
-router.post('/addOneSecretary', (req, res) => {
+/* router.post('/addOneSecretary', (req, res) => {
   req.body.nom = req.body.name,
   req.body.email = req.body.email 
   req.body.password = user.generateHash(req.body.password);;
@@ -103,23 +164,9 @@ router.post('/addOneSecretary', (req, res) => {
       }
     })
   });
-})
+}) */
 
-router.get('/deleteSec/:id', (req, res,next) => {
-  secretere.deleteOne({ id_user: req.params.id }, (err) => {
-    if (err)
-        console.log(err);
-    else {
-      user.deleteOne({ _id: req.params.id }, (err,user) => {
-        console.log(user);
-        res.json('secretere removed !! user removed');
-      })
-    }    
-  })
-})
-
-
-router.post('/updateSec/:id', (req, res, next) => {
+/* router.post('/updateSec/:id', (req, res, next) => {
   let userr = req.body.id_user;
   console.log('user :', userr);
   user.updateOne({ _id: userr._id }, { $set: userr }, function(err) {
@@ -130,7 +177,4 @@ router.post('/updateSec/:id', (req, res, next) => {
         res.json('Secretarry updated !!,user updated');
     }
   })
-});
-
-
-module.exports = router;
+}); */
