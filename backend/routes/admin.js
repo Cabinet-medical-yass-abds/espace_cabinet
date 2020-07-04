@@ -62,16 +62,13 @@ router.post('/update/:id', (req, res, next) => {
   });
 });
 
-router.get('/delete/:id', (req, res,next) => {
-  doctor.deleteOne({ id_user: req.params.id }, (err) => {
-    if (err)
-        console.log(err);
-    else {
-      user.deleteOne({ _id: req.params.id }, (err,user) => {
-        console.log(user);
-        res.json('Doctor removed !! user removed');
-      })
-    }    
+router.get('/delete/:id', (req, res,) => {
+  doctor.findByIdAndDelete({_id : req.params.id},(err)=>{
+    if (err) {
+
+    }else{
+      res.status(200).json('Doctor removed !!')
+    }
   })
 })
 // End Doctors crud
