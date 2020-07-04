@@ -12,7 +12,7 @@
         <div class="col-md-3 col-sm-6 item" *ngFor="let doctor of ad | filter:searchDoctor">
             <div class="card item-card card-block" data-toggle="modal" data-target="#DoctorModal">
                 <img src="assets/doctor-default.png" alt="Photo of sunset">
-                <h5 class="item-card-title mt-3 mb-3">Dr. {{doctor.id_user.nom}} {{doctor.id_user.prenom}}</h5>
+                <h5 class="item-card-title mt-3 mb-3">Dr. {{doctor.nom}} {{doctor.prenom}}</h5>
                 <p class="card-text">{{doctor.bio | slice:0:100}}{{ doctor.bio.length > 100 ? ' ...' : '' }}</p>
             </div>
             <!-- Modal Doctor BIO -->
@@ -20,7 +20,7 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle ">DR {{doctor.id_user.nom | uppercase}} {{doctor.id_user.prenom | uppercase}}</h5>
+                            <h5 class="modal-title" id="exampleModalLongTitle ">DR {{doctor.nom | uppercase}} {{doctor.prenom | uppercase}}</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
@@ -28,7 +28,7 @@
                         <div class="modal-body">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item"><i class="fa fa-map-o" aria-hidden="true "></i>&nbsp;<b>Adresse : </b>{{doctor.adress.city}} ,{{doctor.adress.street}}, {{doctor.adress.zip}}</li>
-                                <li class="list-group-item"><i class="fa fa fa-envelope-o" aria-hidden="true "></i>&nbsp;<b>Email : </b>{{doctor.id_user.email}}</li>
+                                <li class="list-group-item"><i class="fa fa fa-envelope-o" aria-hidden="true "></i>&nbsp;<b>Email : </b>{{doctor.email}}</li>
                                 <li class="list-group-item"><i class="fa fa-venus-mars" aria-hidden="true "></i>&nbsp;<b>Sexe : </b>{{ doctor.man ? 'Homme' : 'Femme' }}</li>
                                 <li class="list-group-item"><i class="fa fa-medkit" aria-hidden="true "></i>&nbsp;<b>Spécialité : </b>{{doctor.spec}}</li>
                             </ul>
@@ -66,11 +66,11 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Nom</label>
-                                        <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrer nom docteur" name="name" ngModel>
+                                    <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrer nom docteur" name="nom" ngModel>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Prénom</label>
-                                        <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrer prénom docteur" name="fname" ngModel>
+                                        <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrer prénom docteur" name="prenom" ngModel>
                                     </div>
                                     <div class="form-group">
                                         <label for="sexe">Sexe:</label>
@@ -134,14 +134,14 @@
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Nom</label>
-                                            <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrer nom docteur" name="name" ngModel *ngIf="!modify; else elseBlock2">
+                                            <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrer nom docteur" name="nom" ngModel *ngIf="!modify; else elseBlock2">
                                             <ng-template #elseBlock2>
-                                                <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrer nom docteur" name="name" [(ngModel)]="doctor.id_user.nom">
+                                                <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrer nom docteur" name="nom" [(ngModel)]="doctor.nom">
                                             </ng-template>
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Prénom</label>
-                                            <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrer prénom docteur" name="fname" [(ngModel)]="doctor.id_user.prenom">
+                                            <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrer prénom docteur" name="prenom" [(ngModel)]="doctor.prenom">
                                         </div>
                                         <div class="form-group">
                                             <label for="sexe">Sexe:</label>

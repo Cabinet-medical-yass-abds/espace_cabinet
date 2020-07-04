@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const doctor = require('../models/doctor');
 const secretere = require('../models/secretere');
+const patient = require('../models/patient')
 const user = require('../models/user');
 
 // Doctors crud
@@ -9,47 +10,31 @@ router.get('/listAll', (req, res) => {
     if (err) { console.log(err) } else {
       res.json(results)
     }
-  }).populate('id_user');
+  })
 })
 
 
 router.post('/addOne', (req, res) => {
-  req.body.man = req.body.sexe;
-  req.body.adress = {
-    city : req.body.city,
-    street : req.body.street,
-    zip : req.body.zip
-  }
-  req.body.nom =  req.body.name;
-  req.body.prenom =  req.body.fname;
-  req.body.role = {
-    isDoctor : true
-  };
-  req.body.id_secrt = req.body.secretaire;
-  delete req.body.secretaire;
-  delete req.body.name;
-  delete req.body.fname;
-  delete req.body.city;
-  delete req.body.street;
-  delete req.body.zip;
-  delete req.body.sexe;
-  user.generateHash(req.body.password)
-  .then(hashedPassword => {
-    req.body.password = hashedPassword;
-    let userr = new user(req.body);
-    userr.save((err,user) => {
-      req.body.id_user = user._id;
-      let doc = new doctor(req.body)
-      doc.save((err) => {
-        if (err) {
-            console.log(err)
-            res.json('erreur')
-        } else {
-            res.json('doctor added !!')
-        }
-      })
-    });
-  });
+  var doc = new doctor({
+    nom : req.body.nom,
+    prenom : req.body.prenom,
+    email : req.body.email,
+    password : user.generateHash(req.body.password),
+    adress : {
+      city : req.body.city,
+      street : req.body.street,
+      zip : req.body.zip
+    },
+    numtel : req.body.numtel,
+    man  : req.body.man ,
+    spec : req.body.spec,
+    bio : req.body.bio,
+    id_secrt : '' 
+  })
+  doc.save((err)=>{
+    if(err){console.log(err)}
+    else{res.status(200).json('doctor added')}
+  })
 })
 
 
@@ -101,25 +86,25 @@ router.get('/listAllSecretaries', (req, res) => {
 })
 
 router.post('/addOneSecretary', (req, res) => {
-  user.generateHash(req.body.password)
-  .then(hashedPassword => {
-    req.body.password = hashedPassword;
-    req.body.role = {
-      isSecretary : true
-    };
-    let userr = new user(req.body);
-    userr.save((err,user) => {
-      req.body.id_user = user._id;
-      let sec = new secretere(req.body)
-      sec.save((err) => {
-        if (err) {
-            console.log(err)
-            res.json('erreur')
-        } else {
-            res.json('doctor added !!')
-        }
-      })
-    });
+  req.body.nom = req.body.name,
+  req.body.email = req.body.email 
+  req.body.password = user.generateHash(req.body.password);;
+  req.body.role = {
+    isSecretary : true
+  };
+  let userr = new user(req.body);
+  console.log(userr)
+  userr.save((err,user) => {
+    req.body.id_user = user._id;
+    let sec = new secretere(req.body)
+    sec.save((err) => {
+      if (err) {
+          console.log(err)
+          res.json('erreur')
+      } else {
+          res.json('doctor added !!')
+      }
+    })
   });
 })
 

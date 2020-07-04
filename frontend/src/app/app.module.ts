@@ -18,11 +18,11 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { LayoutComponent } from './admin/layout/layout.component';
 import { DoctorsComponent } from './admin/doctors/doctors.component';
 
-// Doctor Imports 
+/* // Doctor Imports 
 import { LayoutDoctorComponent } from './doctor/layout/layout.component';
 import { HomeComponent } from './doctor/home/home.component';
 import { LoginDoctorComponent } from './doctor/login-doctor/login-doctor.component';
-import { SecretariesDoctorComponent } from './doctor/secretaries/secretaries.component';
+import { SecretariesDoctorComponent } from './doctor/secretaries/secretaries.component'; */
 
 const appRoutes: Routes = [
   { path: '', component: LandingComponent },
@@ -42,7 +42,7 @@ const appRoutes: Routes = [
       },
     ]
   },
-  { path : 'doctor' , component : LayoutDoctorComponent,
+  /* { path : 'doctor' , component : LayoutDoctorComponent,
     children: [
       {
         path: 'home/:id',
@@ -54,23 +54,23 @@ const appRoutes: Routes = [
       }
     ]
   },
-  { path : 'secretary' , component : LoginSecretaryComponent }
+  { path : 'secretary' , component : LoginSecretaryComponent } */
 ];
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginDoctorComponent,
+    /* LoginDoctorComponent, */
     LoginSecretaryComponent,
     LandingComponent,
     DashboardComponent,
     LayoutComponent,
     DoctorsComponent,
     SecretariesComponent,
-    HomeComponent,
+   /*  HomeComponent,
     LayoutDoctorComponent,
-    SecretariesDoctorComponent
+    SecretariesDoctorComponent */
   ],
   imports: [
     BrowserModule,
