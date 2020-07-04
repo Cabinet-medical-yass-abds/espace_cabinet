@@ -1,19 +1,22 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const Schema = mongoose.Schema;
 
 
 // User Schema
 const userSchema = new Schema({
-    nom: String,
-    prenom: String,
+    nom : String,
+    prenom : String ,
     email: { type: String, unique: true, lowercase: true },
     password: String,
-    role: {
-        isAdmin: { type: Boolean, default: false },
-        isDoctor: { type: Boolean, default: false },
-        isSecretary: { type: Boolean, default: false }
-    }
+    adress: {
+        street: String,
+        city: String,
+        zip: String
+    },
+    numtel :String,
+    man: { type: Boolean ,default :true }, 
+    photo : String
 }, { timestamps: true });
 
 
@@ -26,15 +29,15 @@ const userSchema = new Schema({
 // passwords are not saved to the database as is. Instead, they are hashed first, then saved.
 // hashes are always the same for the same password given the same "salt".
 userSchema.statics.generateHash = function(password) {
-    return bcrypt.hash(password, 8, null);
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
 
 // checking if password is valid
 // this method takes the password, hashes it, and compares it to the user's own password
 // when the two hashes are equal, it means the passwords match
-// userSchema.methods.validPassword = function(password) {
-//     return bcrypt.compareSync(password, this.password);
-// };
+userSchema.methods.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.password);
+};
 
 
 module.exports = mongoose.model('User', userSchema);
