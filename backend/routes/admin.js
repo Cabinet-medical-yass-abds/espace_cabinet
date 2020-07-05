@@ -3,6 +3,7 @@ const doctor = require('../models/doctor');
 const secretere = require('../models/secretere');
 const user = require('../models/user');
 const claim = require('../models/claim')
+const appointement = require('../models/appointement')
 
 //////////////////////////////////////////////////////////// Doctors crud
 router.get('/listAll', (req, res) => {
@@ -74,7 +75,7 @@ router.get('/listclaim',(req,res)=>{
   }).populate('id_patient')
 })
 
-router.post('answerclaim/:id',(req,res)=>{
+router.post('/answerclaim/:id',(req,res)=>{
   claim.findByIdAndUpdate({_id : req.params.id},{answer : req.body.answer},(err)=>{
     if (err) {
       console.log(err)
@@ -91,6 +92,13 @@ router.get('/deleteclaim/:id', (req, res,next) => {
     }else{
       res.json('claim deleted !!')
     }
+  })
+})
+
+//////////////////////////////////////////////////////////// Read all appointement
+router.get('/getAllRv',(req,res)=>{
+  appointement.find({},(err,results)=>{
+    res.json(results)
   })
 })
 

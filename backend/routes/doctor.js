@@ -32,10 +32,10 @@ router.post('/registerDoctor',(req,res)=>{
 })
 
 router.post('/loginDoctor',(req,res)=>{
-  doctor.find({email : req.body.email},(err,results)=>{
+  doctor.findOne({email : req.body.email},(err,results)=>{
     if (err){console.log(err)}
     else{
-      if(results.length == 0){
+      if(!results){
         res.json('Docteur introuvable !')
       }else{
         if (user.generateHash(req.body.password) != results.password){
