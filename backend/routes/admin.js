@@ -15,11 +15,12 @@ router.get('/listAll', (req, res) => {
 })
 
 router.get('/delete/:id', (req, res,) => {
-  doctor.findByIdAndDelete({_id : req.params.id},(err)=>{
+  doctor.findByIdAndDelete({_id : req.params.id},(err,data)=>{
     if (err) {
       console.log(err)
     }else{
-      secretere.findByIdAndUpdate({_id : data.secrt},{id_doctor : null},(err)=>{
+      console.log('my datya:',data);
+      secretere.findByIdAndUpdate({_id : data.id_secrt._id},{id_doctor : null},(err)=>{
         res.json('doctor removed !!')
       })
     }
@@ -44,7 +45,7 @@ router.get('/deleteSec/:id', (req, res,next) => {
     if (err) {
       console.log(err)
     }else{
-      doctor.findByIdAndUpdate({_id : data.id_doctor},{id_secrt : null},(err)=>{
+      doctor.findByIdAndUpdate({_id : data.id_doctor._id},{id_secrt : null},(err)=>{
         res.json('secrt removed !!')
       })
     }
