@@ -21,10 +21,10 @@ export class DoctorsComponent implements OnInit {
   emptyBool;
   modify = false;
   doc_id;
+  mydoctor: doctor;
 
   ngOnInit(): void {
     this.loadAllDoctors();
-    this.loadAllSecretaries();
   }
   // Load all doctors
   loadAllDoctors() {
@@ -39,14 +39,11 @@ export class DoctorsComponent implements OnInit {
     })
   }
 
-  // Load all secretaries
-  loadAllSecretaries() {
-    this.admin.getAllSecretaries().subscribe((data: secretary []) => {
-      this.secretaries = data;
-      console.log('secretaries:',data);
-    })
+  // Click to show doctor informations 
+  doctorInfo(doctor) {
+    this.mydoctor = doctor;
+    console.log('this.mydoctor:',this.mydoctor);
   }
-
 
   // Delete doctor by id
   deleteD(id) {
@@ -56,44 +53,44 @@ export class DoctorsComponent implements OnInit {
   }
 
   // Add doctor
-  onSubmit(f: NgForm) {
-    console.log(f.value); 
-    this.admin.addDoctor(f.value).subscribe(() => {
-      this.loadAllDoctors();
-      $('#AddDoctor').modal('hide');
-    })
-  }
+  // onSubmit(f: NgForm) {
+  //   console.log(f.value); 
+  //   this.admin.addDoctor(f.value).subscribe(() => {
+  //     this.loadAllDoctors();
+  //     $('#AddDoctor').modal('hide');
+  //   })
+  // }
 
   // Update doctor
-  onUpdate(f: NgForm,doctor) {
-    console.log('doctor last:',doctor);
-    f.value.adress = {
-      city : f.value.city,
-      street : f.value.street,
-      zip : f.value.zip
-    }
-    f.value.man = f.value.sexe;
-    delete f.value.city;
-    delete f.value.street;
-    delete f.value.zip;
-    delete f.value.sexe;
-    delete f.value._id;
-    this.admin.updateDoctor(doctor).subscribe(() => {
-      this.loadAllDoctors();
-      $('#AddDoctor').modal('hide');
-    })
-  }
+  // onUpdate(f: NgForm,doctor) {
+  //   console.log('doctor last:',doctor);
+  //   f.value.adress = {
+  //     city : f.value.city,
+  //     street : f.value.street,
+  //     zip : f.value.zip
+  //   }
+  //   f.value.man = f.value.sexe;
+  //   delete f.value.city;
+  //   delete f.value.street;
+  //   delete f.value.zip;
+  //   delete f.value.sexe;
+  //   delete f.value._id;
+  //   this.admin.updateDoctor(doctor).subscribe(() => {
+  //     this.loadAllDoctors();
+  //     $('#AddDoctor').modal('hide');
+  //   })
+  // }
 
-  updateDoctor(doctor) {
-    console.log('doctor:',doctor);
-    this.doc_id = doctor._id;
-    this.doctor = doctor;
-    console.log('doctor:',this.doctor);
-    $('#AddDoctor').css({
-      'overflow-x': 'hidden',
-      'overflow-y': 'auto'
-    })
-    this.modify = true;
-  }
+  // updateDoctor(doctor) {
+  //   console.log('doctor:',doctor);
+  //   this.doc_id = doctor._id;
+  //   this.doctor = doctor;
+  //   console.log('doctor:',this.doctor);
+  //   $('#AddDoctor').css({
+  //     'overflow-x': 'hidden',
+  //     'overflow-y': 'auto'
+  //   })
+  //   this.modify = true;
+  // }
 
 }

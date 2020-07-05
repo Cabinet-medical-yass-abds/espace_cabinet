@@ -42,4 +42,14 @@ export class AdminService {
     return this.http.post(`${this.url}/updateSec/`+secretary.id_user._id,secretary);
   }
 
+  // Patients 
+  getAllPatients() {
+    return this.http.get(`${this.url}/listpatient`);
+  }
+
+  //Claims 
+  getAllClaims() {
+    return this.http.get(`${this.url}/listclaim`);
+  }
+
 }

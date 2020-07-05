@@ -1,16 +1,25 @@
 export interface doctor {
-  nom : String,
-    prenom : String ,
-    email: { type: String, unique: true, lowercase: true },
-    password: String,
+  _id: string,
+  nom : string,
+    prenom : string ,
+    email: { type: string, unique: true, lowercase: true },
+    password: string,
     adress: {
-        street: String,
-        city: String,
-        zip: String
+        street: string,
+        city: string,
+        zip: string
     },
-    numtel :String,
+    numtel :string,
     man: { type: Boolean ,default :true }, 
-    spec: String,
-    bio: String,
-  id_secrt: String,
+    spec: string,
+    bio: string,
+  id_secrt: {
+    _id: string,
+    nom: string,
+    prenom: string,
+    email: {type: string, unique: true, lowercase: true  },
+    password: string,
+    id_doctor: string,
+    numtel :string
+  }
 }

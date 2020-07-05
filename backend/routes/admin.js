@@ -71,7 +71,7 @@ router.get('/listclaim',(req,res)=>{
     }else{
       res.json(results)
     }
-  }).populate('id_user')
+  }).populate('id_patient')
 })
 
 router.post('answerclaim/:id',(req,res)=>{

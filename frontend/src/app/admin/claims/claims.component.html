@@ -1,0 +1,27 @@
+<div class="container mt-2">
+    <div class="search-hero">
+        <input class="form-control" type="text" name="search" [(ngModel)]="searchClaim" autocomplete="off" placeholder="Chercher une réclamation . . .">
+    </div>
+    <!-- List all claims -->
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 item" *ngFor="let claim of claims | filter:searchClaim">
+            <div class="card mb-3" [ngClass]="(claim.answer == '')?'border-danger':'border-primary'">
+                <div class="card-header"><b>Réclamation de :</b> {{claim.id_patient.nom | uppercase}} {{claim.id_patient.prenom | uppercase}}</div>
+                <div class="card-body">
+                    <h5 class="card-title">Primary card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="jumbotron jumbotron-fluid mt-5">
+        <div class=" container text-center">
+            <h1 class="display-4 ">Vous n'avez pas de réclamation pour le moment</h1>
+            <p class="lead "></p>
+        </div>
+    </div> -->
+
+    <!-- End List all claims -->
+</div>

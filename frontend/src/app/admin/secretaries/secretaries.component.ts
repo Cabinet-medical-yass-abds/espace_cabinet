@@ -15,7 +15,7 @@ export class SecretariesComponent implements OnInit {
 
   secretaries : secretary [];
   searchSecretary;
-  secretary;
+  mySecretary: secretary;
   emptyBool;
   modify = false;
 
@@ -35,24 +35,30 @@ export class SecretariesComponent implements OnInit {
     })
   }
 
-  onSubmit(f: NgForm) {
-    console.log(f.value);
-    f.value.nom = f.value.name;
-    f.value.prenom = f.value.fname;
-    delete f.value.fname;
-    delete f.value.name;
-    this.admin.addSecretary(f.value).subscribe(() => {
-      this.loadAllSecretaries();
-      $('#addSecretary').modal('hide');
-    })
+  // Click to show doctor informations 
+  SecretaryInfo(Secretary) {
+    this.mySecretary = Secretary;
+    console.log('this.mySecretary:',this.mySecretary);
   }
-  onUpdate(f: NgForm,secretary) {
-    console.log('secretary;',secretary);
-    this.admin.updateSecretary(secretary).subscribe(() => {
-      this.loadAllSecretaries();
-      $('#addSecretary').modal('hide');
-    })
-  }
+
+  // onSubmit(f: NgForm) {
+  //   console.log(f.value);
+  //   f.value.nom = f.value.name;
+  //   f.value.prenom = f.value.fname;
+  //   delete f.value.fname;
+  //   delete f.value.name;
+  //   this.admin.addSecretary(f.value).subscribe(() => {
+  //     this.loadAllSecretaries();
+  //     $('#addSecretary').modal('hide');
+  //   })
+  // }
+  // onUpdate(f: NgForm,secretary) {
+  //   console.log('secretary;',secretary);
+  //   this.admin.updateSecretary(secretary).subscribe(() => {
+  //     this.loadAllSecretaries();
+  //     $('#addSecretary').modal('hide');
+  //   })
+  // }
 
    // Delete secretary by id
   deleteD(id) {
@@ -60,10 +66,11 @@ export class SecretariesComponent implements OnInit {
       this.loadAllSecretaries();
     })
   }
-  updateSecretary(secretary) {
-    console.log('secretary:',secretary);
-    this.secretary = secretary;
-    this.modify = true;
-  }
+
+  // updateSecretary(secretary) {
+  //   console.log('secretary:',secretary);
+  //   this.secretary = secretary;
+  //   this.modify = true;
+  // }
 
 }
