@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../admin.service';
 import { claim } from 'src/app/claim.model';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-claims',
@@ -28,6 +29,14 @@ export class ClaimsComponent implements OnInit {
         this.emptyBool = true;
       }
     })
+  }
+
+  onSubmit(f: NgForm,id_claim) {
+    console.log(f.value); 
+    console.log('id_claim:',id_claim);
+    this.admin.answerClaim(f.value,id_claim).subscribe(() => {
+      this.loadAllClaims();
+    });
   }
 
   
