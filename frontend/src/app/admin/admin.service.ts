@@ -51,9 +51,13 @@ export class AdminService {
   getAllClaims() {
     return this.http.get(`${this.url}/listclaim`);
   }
-
+  
   answerClaim(answer,id_claim) {
     return this.http.post(`${this.url}/answerclaim/`+id_claim,answer);
+  }
+
+  deleteClaim(id_claim) {
+    return this.http.get(`${this.url}/deleteclaim/`+id_claim);
   }
 
 }

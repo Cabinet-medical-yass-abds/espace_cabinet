@@ -19,6 +19,7 @@ export class ClaimsComponent implements OnInit {
     this.loadAllClaims();
   }
 
+  // List all claims
   loadAllClaims() {
     this.admin.getAllClaims().subscribe((data: claim []) => {
       this.claims = data;
@@ -31,6 +32,7 @@ export class ClaimsComponent implements OnInit {
     })
   }
 
+  // Answer claim
   onSubmit(f: NgForm,id_claim) {
     console.log(f.value); 
     console.log('id_claim:',id_claim);
@@ -39,6 +41,12 @@ export class ClaimsComponent implements OnInit {
     });
   }
 
+  // Delete claim
+  deleteClaim(id_claim) {
+    this.admin.deleteClaim(id_claim).subscribe(() => {
+      this.loadAllClaims();
+    });
+  }
   
 
 }
