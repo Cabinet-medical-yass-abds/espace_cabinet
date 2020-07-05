@@ -19,9 +19,11 @@ router.get('/delete/:id', (req, res,) => {
     if (err) {
       console.log(err)
     }else{
-      res.json('Doctor removed !!')
+      secretere.findByIdAndUpdate({_id : data.secrt},{id_doctor : null},(err)=>{
+        res.json('doctor removed !!')
+      })
     }
-  })
+  }).populate('id_secrt')
 })
 // End Doctors crud
 
@@ -38,13 +40,15 @@ router.get('/listAllSecretaries', (req, res) => {
 
 
 router.get('/deleteSec/:id', (req, res,next) => {
-  secretere.findByIdAndDelete({_id : req.params.id},(err)=>{
+  secretere.findByIdAndDelete({_id : req.params.id},(err,data)=>{
     if (err) {
       console.log(err)
     }else{
-      res.json('Doctor removed !!')
+      doctor.findByIdAndUpdate({_id : data.id_doctor},{id_secrt : null},(err)=>{
+        res.json('secrt removed !!')
+      })
     }
-  })
+  }).populate('id_doctor')
 })
 
 /////////////////////////////////////////////////////////////patient crud
@@ -66,7 +70,7 @@ router.get('/listclaim',(req,res)=>{
     }else{
       res.json(results)
     }
-  })
+  }).populate('id_user')
 })
 
 router.post('answerclaim/:id',(req,res)=>{
