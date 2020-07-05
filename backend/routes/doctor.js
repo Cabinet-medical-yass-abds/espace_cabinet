@@ -8,12 +8,13 @@ const consult = require('../models/consultation')
 const upload = require('../config/multer_cofig');
 const consultation = require('../models/consultation');
 
+///////////////////////////////////////////////////////// Register Doctor
 router.post('/registerDoctor',(req,res)=>{
   var doc = new doctor({
     nom : req.body.nom,
     prenom : req.body.prenom,
     email : req.body.email,
-    password : user.generateHash(req.body.password),
+    password : doctor.generateHash(req.body.password),
     adress : {
       city : req.body.city,
       street : req.body.street,
@@ -31,14 +32,16 @@ router.post('/registerDoctor',(req,res)=>{
   })
 })
 
+///////////////////////////////////////////////////////// Login Doctor
 router.post('/loginDoctor',(req,res)=>{
   doctor.findOne({email : req.body.email},(err,results)=>{
     if (err){console.log(err)}
     else{
+      console.log(results)
       if(!results){
         res.json('Docteur introuvable !')
       }else{
-        if (user.generateHash(req.body.password) != results.password){
+        if (!results.validPassword(req.body.password)){
           res.json('Mot de passe incorrecte !')
         }
         else{
@@ -116,28 +119,3 @@ router.get('/deleteConsult/:id',(req,res)=>{
 module.exports = router;
 
 
-
-
-
-
-
-/* router.post('/addSecretary/:id_doc', (req, res) => {
-  console.log('req.params.id_doc:',req.params.id_doc);
-  // user.generateHash(req.body.password)
-  // .then(hashedPassword => {
-  //   req.body.password = hashedPassword;
-  //   let userr = new user(req.body);
-  //   userr.save((err,user) => {
-  //     req.body.id_user = user._id;
-  //     let doc = new doctor(req.body)
-  //     doc.save((err) => {
-  //       if (err) {
-  //           console.log(err)
-  //           res.json('erreur')
-  //       } else {
-  //           res.json('Secretary added !!')
-  //       }
-  //     })
-  //   });
-  // });
-}) */

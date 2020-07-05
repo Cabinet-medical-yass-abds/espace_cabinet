@@ -11,7 +11,7 @@ router.post('/registerSec',(req,res)=>{
       nom : req.body.nom,
       prenom : req.body.prenom,
       email : req.body.email,
-      password : user.generateHash(req.body.password),
+      password : secrt.generateHash(req.body.password),
       numtel : req.body.numtel,
       id_doctor : null
     })
@@ -28,7 +28,7 @@ router.post('/loginSec',(req,res)=>{
         if(!results){
             res.json('secretary introuvable !')
         }else{
-            if (user.generateHash(req.body.password) != results.password){
+            if (!results.validPassword(req.body.password)){
             res.json('Mot de passe incorrecte !')
             }
             else{
