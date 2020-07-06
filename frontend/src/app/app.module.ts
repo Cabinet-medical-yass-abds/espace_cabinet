@@ -22,11 +22,11 @@ import { DoctorsComponent } from './admin/doctors/doctors.component';
 import { PatientsComponent } from './admin/patients/patients.component';
 import { ClaimsComponent } from './admin/claims/claims.component';
 
-/* // Doctor Imports 
+// Doctor Imports 
 import { LayoutDoctorComponent } from './doctor/layout/layout.component';
 import { HomeComponent } from './doctor/home/home.component';
 import { LoginDoctorComponent } from './doctor/login-doctor/login-doctor.component';
-import { SecretariesDoctorComponent } from './doctor/secretaries/secretaries.component'; */
+import { SecretariesDoctorComponent } from './doctor/secretaries/secretaries.component';
 
 registerLocaleData(localeFr, 'fr');
 const appRoutes: Routes = [
@@ -55,7 +55,7 @@ const appRoutes: Routes = [
       }
     ]
   },
-  /* { path : 'doctor' , component : LayoutDoctorComponent,
+  { path : 'doctor' , component : LayoutDoctorComponent,
     children: [
       {
         path: 'home/:id',
@@ -67,14 +67,14 @@ const appRoutes: Routes = [
       }
     ]
   },
-  { path : 'secretary' , component : LoginSecretaryComponent } */
+  { path : 'secretary' , component : LoginSecretaryComponent }
 ];
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    /* LoginDoctorComponent, */
+    LoginDoctorComponent,
     LoginSecretaryComponent,
     LandingComponent,
     DashboardComponent,
@@ -83,9 +83,9 @@ const appRoutes: Routes = [
     SecretariesComponent,
     PatientsComponent,
     ClaimsComponent,
-   /*  HomeComponent,
+    HomeComponent,
     LayoutDoctorComponent,
-    SecretariesDoctorComponent */
+    SecretariesDoctorComponent
   ],
   imports: [
     BrowserModule,

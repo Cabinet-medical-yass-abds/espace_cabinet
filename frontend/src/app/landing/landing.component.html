@@ -1,42 +1,6 @@
 <div class="jumbotron vertical-center">
     <div class="container text-center">
         <div class="card-deck col-md-12 my-auto">
-            <div class="modal fade" id="LoginAdmin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-            aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered text-left" role="document">
-                    <div class="modal-content">
-                    <div class="modal-header text-center">
-                        <h4 class="modal-title w-100 font-weight-bold">CONNECTER VOUS <span class="text-info">[ADMIN]</span></h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form #f="ngForm" (ngSubmit)="onSubmit(f)">
-                            <div class="alert alert-danger text-center" role="alert" *ngIf='alertMessageAdmin != ""'>
-                                {{alertMessageAdmin}}
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail3">Adresse email</label>
-                                <input type="email" class="form-control" id="exampleInputEmail3" aria-describedby="emailHelp"
-                                placeholder="Enter email" name="emailAdmin" ngModel required>
-                                <small id="emailHelp" class="form-text text-muted">Vos coordonnées sont sécurisés.</small>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword3">Mot de passe</label>
-                                <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password"
-                                name="passwordAdmin" ngModel required>
-                            </div>
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-primary">Se connecter</button>
-                            </div>
-                        </form>
-                    </div>
-                    
-                    </div>
-                </div>
-            </div>
-
             <div class="card">
                 <img class="card-img-top" src="assets/admin.png" alt="Card image cap">
                 <div class="card-body">
@@ -53,7 +17,7 @@
                     <p class="card-text">Connecter vous en tant que docteur.</p>
                     <p class="card-text"><small class="text-muted"></small></p>
                     <div class="text-center">
-                        <button class="btn btn-dark mt-4 btn-block" data-toggle="modal" data-target="#LoginAdmin">Connecter</button>
+                        <button class="btn btn-dark mt-4 btn-block" data-toggle="modal" data-target="#LoginDoctor">Connecter</button>
                         <button class="btn btn-outline-dark mt-4 btn-block" data-toggle="modal" data-target="#LoginAdmin">Inscrivez-vous</button>
                     </div>
                    
@@ -74,3 +38,79 @@
         </div>
     </div>
 </div>
+
+<!-- Login modal Admin  -->
+<div class="modal fade" id="LoginAdmin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered text-left" role="document">
+        <div class="modal-content">
+        <div class="modal-header text-center">
+            <h4 class="modal-title w-100 font-weight-bold">CONNECTER VOUS <span class="text-secondary">[ADMIN]</span></h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+                <div class="alert alert-danger text-center" role="alert" *ngIf='alertMessageAdmin != ""'>
+                    {{alertMessageAdmin}}
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail3">Adresse email</label>
+                    <input type="email" class="form-control" id="exampleInputEmail3" aria-describedby="emailHelp"
+                    placeholder="Enter email" name="emailAdmin" ngModel required>
+                    <small id="emailHelp" class="form-text text-muted">Vos coordonnées sont sécurisés.</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword3">Mot de passe</label>
+                    <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password"
+                    name="passwordAdmin" ngModel required>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-secondary">Se connecter</button>
+                </div>
+            </form>
+        </div>
+        
+        </div>
+    </div>
+</div>
+<!--  End Login modal Admin  -->
+
+<!-- Login modal doctor  -->
+<div class="modal fade" id="LoginDoctor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered text-left" role="document">
+        <div class="modal-content">
+        <div class="modal-header text-center">
+            <h4 class="modal-title w-100 font-weight-bold">CONNECTER VOUS <span class="text-info">[DOCTEUR]</span></h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form #f2="ngForm" (ngSubmit)="onSubmitDoctor(f2)">
+                <div class="alert alert-danger text-center" role="alert" *ngIf='alertMessageDoctor != ""'>
+                    {{alertMessageDoctor}}
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail3">Adresse email</label>
+                    <input type="email" class="form-control" id="exampleInputEmail3" aria-describedby="emailHelp"
+                    placeholder="Enter email" name="email" ngModel required>
+                    <small id="emailHelp" class="form-text text-muted">Vos coordonnées sont sécurisés.</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword3">Mot de passe</label>
+                    <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password"
+                    name="password" ngModel required>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-dark">Se connecter</button>
+                </div>
+            </form>
+        </div>
+        
+        </div>
+    </div>
+</div>
+<!--  End Login modal Admin  -->
