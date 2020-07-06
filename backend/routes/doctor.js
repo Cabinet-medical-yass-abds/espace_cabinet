@@ -21,14 +21,14 @@ router.post('/registerDoctor',(req,res)=>{
       zip : req.body.zip
     },
     numtel : req.body.numtel,
-    man  : req.body.man ,
+    man  : req.body.man,
     spec : req.body.spec,
     bio : req.body.bio,
     id_secrt : null 
   })
-  doc.save((err)=>{
+  doc.save((err,data)=>{
     if(err){console.log(err)}
-    else{res.json('doctor added')}
+    else{res.json(data)}
   })
 })
 

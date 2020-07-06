@@ -27,7 +27,9 @@ export class LayoutDoctorComponent implements OnInit {
     });
     this.myDoctor =  JSON.parse(localStorage.getItem('doctor'));  
     this.doctor_name = this.myDoctor.nom;
-    // this.getDoctorById();
+  }
+  logout() {
+    localStorage.clear();
   }
 
   // getDoctorById() {

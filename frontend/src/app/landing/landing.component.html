@@ -51,7 +51,7 @@ aria-hidden="true">
             </button>
         </div>
         <div class="modal-body">
-            <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+            <form #f="ngForm" (ngSubmit)="onSubmitAdmin(f)">
                 <div class="alert alert-danger text-center" role="alert" *ngIf='alertMessageAdmin != ""'>
                     {{alertMessageAdmin}}
                 </div>
@@ -126,57 +126,71 @@ aria-hidden="true">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST">
+            <form #f3="ngForm" (ngSubmit)="onSubmitDoctorRegister(f3)">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="formGroupExampleInput1">Nom </label>
-                        <input type="text" class="form-control" id="formGroupExampleInput1" placeholder="" name="nom">
+                        <input type="text" class="form-control" id="formGroupExampleInput1" placeholder="" name="nom" ngModel required>
                     </div>
                     <div class="form-group">
                         <label for="formGroupExampleInput2">Prénom</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="" name="prenom">
+                        <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="" name="prenom" ngModel required>
                     </div>
                     <hr>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" ngModel required>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Mot de passe</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+                        <input type="password" class="form-control" id="exampleInputPassword1" name="password" ngModel required>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword2">Confirmation mot de passe</label>
-                        <input type="password" class="form-control" id="exampleInputPassword2" name="cpass">
+                        <input type="password" class="form-control" id="exampleInputPassword2" name="cpass" ngModel required>
                     </div>
                     <hr>
                     <div class="form-group mt-3">
                         <label for="inputAddress2">Rue</label>
-                        <input type="text" class="form-control" id="inputAddress2" placeholder="" name="street">
+                        <input type="text" class="form-control" id="inputAddress2" placeholder="" name="street" ngModel required>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-8">
                         <label for="inputCity">Gouvernorat</label>
-                        <input type="text" class="form-control" id="inputCity"  name="city" >
+                        <input type="text" class="form-control" id="inputCity"  name="city" ngModel required>
                         </div>
                         <div class="col-1"></div>
                         <div class="form-group col-md-3">
                             <label for="inputZip">Code postal</label>
-                            <input type="text" class="form-control" id="inputZip"  name="zip">
+                            <input type="text" class="form-control" id="inputZip"  name="zip" ngModel required>
                         </div>
                     </div>
                     <hr>
                     <div class="form-group">
+                        <label for="sexe">Sexe:</label>
+                        <select name="man" id="sexe" class="form-control" ngModel>
+                            <option value="true">Homme</option>
+                            <option value="false">Femme</option>
+                        </select>
+                    </div>
+                    <hr>
+                    <div class="form-group">
                         <label for="inputAddress2">Spécialité</label>
-                        <input type="text" class="form-control" id="inputAddress2" placeholder="" name="spec">
+                        <input type="text" class="form-control" id="inputAddress2" placeholder="" name="spec" ngModel required>
                     </div>
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">Téléphone</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="+216 .. " aria-label="Username" aria-describedby="basic-addon1" name="numtel"> 
+                        <input type="text" class="form-control" placeholder="+216 .. " aria-label="Username" aria-describedby="basic-addon1" name="numtel" ngModel required> 
+                    </div>
+                    <hr>
+                    <div class="form-group mt-2">
+                        <label for="bio">Bio</label>
+                        <textarea class="form-control" id="bio" rows="3" name="bio" ngModel required></textarea>
                     </div>
                 </div>
+                
                 <div class="modal-footer text-center d-block">
                     <button type="submit" class="btn btn-outline-dark">Créez votre compte</button>
                 </div>

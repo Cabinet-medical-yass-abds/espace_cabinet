@@ -16,6 +16,11 @@ export class DoctorService {
     return this.http.post(`${this.url}/loginDoctor/`,doctor);
   }
 
+  // Login doctor 
+  RegisterDoctor(doctor) {
+    return this.http.post(`${this.url}/registerDoctor/`,doctor);
+  }
+
   // Listing secretaries 
   getSecretaries(doc_id) {
     return this.http.get(`${this.url}/allSecretaries/`+doc_id);

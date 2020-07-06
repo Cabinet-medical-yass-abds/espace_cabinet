@@ -20,7 +20,7 @@ export class LandingComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit(f: NgForm) {
+  onSubmitAdmin(f: NgForm) {
     console.log('f.value',f.value);
     if (f.value.emailAdmin != this.emailAdmin) {
       this.alertMessageAdmin = 'Email est incorrecte';
@@ -40,10 +40,20 @@ export class LandingComponent implements OnInit {
         $('#LoginDoctor').modal('hide');
         localStorage.setItem('doctor', JSON.stringify(data)); 
         this.router.navigate(['doctor/home/'+data._id]);
+      }else {
+        this.alertMessageDoctor = data;
+      }
+    })
+  }
 
-        // localStorage.setItem('user', JSON.stringify(user)); 
-        // JSON.parse(localStorage.getItem('user')); 
-        // localStorage.clear();
+  onSubmitDoctorRegister(f: NgForm) {
+    console.log('f.value',f.value);
+    this.doctor.RegisterDoctor(f.value).subscribe((data: any) => {
+      console.log('data',data);
+      if (data._id != undefined) {
+        $('#RegisterDoctor').modal('hide');
+        localStorage.setItem('doctor', JSON.stringify(data)); 
+        this.router.navigate(['doctor/home/'+data._id]);
       }else {
         this.alertMessageDoctor = data;
       }
