@@ -52,6 +52,18 @@ router.post('/loginDoctor',(req,res)=>{
   })
 })
 
+router.get('/getDoc/:id',(req,res)=>{
+  doctor.findById({_id : req.params.id},(err,results)=>{
+    if (err){console.log(err)}
+    else{
+      res.json(results)
+    }
+  })
+})
+
+
+
+
 /////////////////////////////////Messsages
 router.get('/listMsg/:id',(req,res)=>{
   message.find({id_doctor : req.params.id},(err,results)=>{
