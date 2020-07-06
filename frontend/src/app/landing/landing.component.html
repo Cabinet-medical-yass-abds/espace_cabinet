@@ -18,7 +18,7 @@
                     <p class="card-text"><small class="text-muted"></small></p>
                     <div class="text-center">
                         <button class="btn btn-dark mt-4 btn-block" data-toggle="modal" data-target="#LoginDoctor">Connecter</button>
-                        <button class="btn btn-outline-dark mt-4 btn-block" data-toggle="modal" data-target="#LoginAdmin">Inscrivez-vous</button>
+                        <button class="btn btn-outline-dark mt-4 btn-block" data-toggle="modal" data-target="#RegisterDoctor">Inscrivez-vous</button>
                     </div>
                    
                 </div>
@@ -58,12 +58,12 @@ aria-hidden="true">
                 <div class="form-group">
                     <label for="exampleInputEmail3">Adresse email</label>
                     <input type="email" class="form-control" id="exampleInputEmail3" aria-describedby="emailHelp"
-                    placeholder="Enter email" name="emailAdmin" ngModel required>
+                    placeholder="Taper votre adresse email" name="emailAdmin" ngModel required>
                     <small id="emailHelp" class="form-text text-muted">Vos coordonnées sont sécurisés.</small>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword3">Mot de passe</label>
-                    <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password"
+                    <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Taper votre mot de passe"
                     name="passwordAdmin" ngModel required>
                 </div>
                 <div class="text-center">
@@ -96,12 +96,12 @@ aria-hidden="true">
                 <div class="form-group">
                     <label for="exampleInputEmail3">Adresse email</label>
                     <input type="email" class="form-control" id="exampleInputEmail3" aria-describedby="emailHelp"
-                    placeholder="Enter email" name="email" ngModel required>
+                    placeholder="Taper votre adresse email" name="email" ngModel required>
                     <small id="emailHelp" class="form-text text-muted">Vos coordonnées sont sécurisés.</small>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword3">Mot de passe</label>
-                    <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password"
+                    <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Taper votre mot de passe"
                     name="password" ngModel required>
                 </div>
                 <div class="text-center">
@@ -114,3 +114,74 @@ aria-hidden="true">
     </div>
 </div>
 <!--  End Login modal Admin  -->
+
+<!-- Register modal doctor  -->
+<div class="modal fade" id="RegisterDoctor" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered text-left" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">INSCRIVEZ-VOUS <span class="text-info">[DOCTEUR]</span></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="formGroupExampleInput1">Nom </label>
+                        <input type="text" class="form-control" id="formGroupExampleInput1" placeholder="" name="nom">
+                    </div>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput2">Prénom</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="" name="prenom">
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Mot de passe</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword2">Confirmation mot de passe</label>
+                        <input type="password" class="form-control" id="exampleInputPassword2" name="cpass">
+                    </div>
+                    <hr>
+                    <div class="form-group mt-3">
+                        <label for="inputAddress2">Rue</label>
+                        <input type="text" class="form-control" id="inputAddress2" placeholder="" name="street">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-8">
+                        <label for="inputCity">Gouvernorat</label>
+                        <input type="text" class="form-control" id="inputCity"  name="city" >
+                        </div>
+                        <div class="col-1"></div>
+                        <div class="form-group col-md-3">
+                            <label for="inputZip">Code postal</label>
+                            <input type="text" class="form-control" id="inputZip"  name="zip">
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <label for="inputAddress2">Spécialité</label>
+                        <input type="text" class="form-control" id="inputAddress2" placeholder="" name="spec">
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">Téléphone</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="+216 .. " aria-label="Username" aria-describedby="basic-addon1" name="numtel"> 
+                    </div>
+                </div>
+                <div class="modal-footer text-center d-block">
+                    <button type="submit" class="btn btn-outline-dark">Créez votre compte</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Register modal doctor  -->

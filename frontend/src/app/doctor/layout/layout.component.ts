@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DoctorService } from '../doctor.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { doctor } from 'src/app/doctor.model';
 declare var $: any;
 
 @Component({
@@ -13,6 +14,7 @@ export class LayoutDoctorComponent implements OnInit {
   routeSub;
   doctor_id;
   doctor_name;
+  myDoctor: doctor;
   constructor(
     private doctor : DoctorService,
     private route: ActivatedRoute,
@@ -23,7 +25,8 @@ export class LayoutDoctorComponent implements OnInit {
       e.preventDefault();
       $("#wrapper").toggleClass("toggled");
     });
-    this.doctor_name = localStorage.getItem('doctor_name');
+    this.myDoctor =  JSON.parse(localStorage.getItem('doctor'));  
+    this.doctor_name = this.myDoctor.nom;
     // this.getDoctorById();
   }
 
