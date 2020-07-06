@@ -38,12 +38,12 @@ export class LandingComponent implements OnInit {
       console.log('data',data);
       if (data._id != undefined) {
         $('#LoginDoctor').modal('hide');
+        localStorage.setItem('doctor_name',data.nom);
         this.router.navigate(['doctor/home/'+data._id]);
       }else {
         this.alertMessageDoctor = data;
       }
     })
-    
   }
 
 }

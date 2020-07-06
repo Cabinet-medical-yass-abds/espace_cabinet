@@ -9,6 +9,8 @@ export class DoctorService {
   constructor(private http:HttpClient) { }
   url = 'http://localhost:3000/doctor';
 
+
+
   // Login doctor 
   LoginDoctor(doctor) {
     return this.http.post(`${this.url}/loginDoctor/`,doctor);

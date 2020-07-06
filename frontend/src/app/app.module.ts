@@ -25,7 +25,6 @@ import { ClaimsComponent } from './admin/claims/claims.component';
 // Doctor Imports 
 import { LayoutDoctorComponent } from './doctor/layout/layout.component';
 import { HomeComponent } from './doctor/home/home.component';
-import { LoginDoctorComponent } from './doctor/login-doctor/login-doctor.component';
 import { SecretariesDoctorComponent } from './doctor/secretaries/secretaries.component';
 
 registerLocaleData(localeFr, 'fr');
@@ -74,7 +73,6 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    LoginDoctorComponent,
     LoginSecretaryComponent,
     LandingComponent,
     DashboardComponent,
