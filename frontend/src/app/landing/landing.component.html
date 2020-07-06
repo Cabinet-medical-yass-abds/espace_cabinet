@@ -1,32 +1,74 @@
 <div class="jumbotron vertical-center">
     <div class="container text-center">
-        <div class="card-deck col-md-12 align-self-center my-auto">
+        <div class="card-deck col-md-12 my-auto">
+            <div class="modal fade" id="LoginAdmin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered text-left" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100 font-weight-bold">CONNECTER VOUS <span class="text-info">[ADMIN]</span></h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+                            <div class="alert alert-danger text-center" role="alert" *ngIf='alertMessageAdmin != ""'>
+                                {{alertMessageAdmin}}
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail3">Adresse email</label>
+                                <input type="email" class="form-control" id="exampleInputEmail3" aria-describedby="emailHelp"
+                                placeholder="Enter email" name="emailAdmin" ngModel required>
+                                <small id="emailHelp" class="form-text text-muted">Vos coordonnées sont sécurisés.</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword3">Mot de passe</label>
+                                <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password"
+                                name="passwordAdmin" ngModel required>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Se connecter</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    </div>
+                </div>
+            </div>
+
             <div class="card">
                 <img class="card-img-top" src="assets/admin.png" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title">Administrateur</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    <a href="/admin/dashboard">Connect</a>
+                    <p class="card-text">Connecter vous en tant qu'administrateur.</p>
+                    <p class="card-text"><small class="text-muted"></small></p>
+                    <button class="btn btn-secondary btn-block" data-toggle="modal" data-target="#LoginAdmin">Connecter</button>
                 </div>
             </div>
             <div class="card">
                 <img class="card-img-top" src="assets/doctor.png" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">Doctor</h5>
-                    <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    <a href="/doctor">click</a>
+                    <h5 class="card-title">Docteur</h5>
+                    <p class="card-text">Connecter vous en tant que docteur.</p>
+                    <p class="card-text"><small class="text-muted"></small></p>
+                    <div class="text-center">
+                        <button class="btn btn-dark mt-4 btn-block" data-toggle="modal" data-target="#LoginAdmin">Connecter</button>
+                        <button class="btn btn-outline-dark mt-4 btn-block" data-toggle="modal" data-target="#LoginAdmin">Inscrivez-vous</button>
+                    </div>
+                   
                 </div>
             </div>
             <div class="card">
                 <img class="card-img-top" src="assets/sec.png" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title">Sécretaire</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    <a [routerLink]="['/secretary']">click</a>
-                    <a routerLink="/secretary">link to user component</a>
+                    <p class="card-text">Connecter vous en tant que sécretaire.</p>
+                    <p class="card-text"><small class="text-muted"></small></p>
+                    <div class="text-center">
+                        <button class="btn btn-info mt-4 btn-block" data-toggle="modal" data-target="#LoginAdmin">Connecter</button>
+                        <button class="btn btn-outline-info mt-4 btn-block" data-toggle="modal" data-target="#LoginAdmin">Inscrivez-vous</button>
+                    </div>
                 </div>
             </div>
         </div>
