@@ -49,7 +49,7 @@ router.post('/loginDoctor',(req,res)=>{
         }
       }
     }
-  })
+  }).populate('id_secrt')
 })
 
 router.get('/getDoc/:id',(req,res)=>{
@@ -102,6 +102,17 @@ router.get('/hireSec/:id_sec/:id_doc',(req,res)=>{
     else{
       secretere.findByIdAndUpdate({_id  :  req.params.id_sec},{id_doctor : results.id},(err,data)=>{
         res.json('secretaire ajoutée')
+      })
+    }
+  })
+})
+
+router.get('/unhire/:id_sec/:id_doc',(req,res)=>{
+  doctor.findByIdAndUpdate({_id : req.params.id_doc},{id_secrt : null},(err,results)=>{
+    if(err){console.log(err)}
+    else{
+      secretere.findByIdAndUpdate({_id  :  req.params.id_sec},{id_doctor : null},(err,data)=>{
+        res.json('secretaire unhired')
       })
     }
   })
