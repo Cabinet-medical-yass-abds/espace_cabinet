@@ -3,6 +3,7 @@ import { secretary } from '../../secretary.model';
 import { DoctorService } from '../doctor.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {NgForm} from '@angular/forms';
+import { doctor } from 'src/app/doctor.model';
 declare var $: any;
 
 @Component({
@@ -17,12 +18,46 @@ export class SecretariesDoctorComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router) { }
 
+  secretaries : secretary [];
   searchSecretary;
   modify = false;
+  emptyBool;
+  mySecretary: secretary;
+  myDoctor: doctor;
+  doc_id;
+
   ngOnInit(): void {
+    this.loadAllSecretaries();
+    this.myDoctor =  JSON.parse(localStorage.getItem('doctor'));  
+    this.doc_id = this.myDoctor._id;
   }
 
-   onSubmit(f: NgForm) {
+  loadAllSecretaries() {
+    this.doctor.listSecWitoutDoc().subscribe((data: secretary []) => {
+      this.secretaries = data;
+      console.log('secretaries:',data);
+      if (data.length > 0) {
+        this.emptyBool = false;
+      }else{
+        this.emptyBool = true;
+      }
+    })
+  }
+
+   // Click to show doctor informations 
+   SecretaryInfo(Secretary) {
+    this.mySecretary = Secretary;
+    console.log('this.mySecretary:',this.mySecretary);
+  }
+
+  hire(sec_id , id_doc){
+    this.doctor.hireSecrt(sec_id  , id_doc).subscribe(()=>{
+      this.loadAllSecretaries();
+    });
+  }
+ 
+
+  /*  onSubmit(f: NgForm) {
     console.log(f.value); 
     this.route.params.subscribe(params => {
       console.log(params['id']) //log the value of id
@@ -30,7 +65,6 @@ export class SecretariesDoctorComponent implements OnInit {
       //   $('#addSecretary').modal('hide');
       // })
     });
-   
-  }
+  } */
 
 }

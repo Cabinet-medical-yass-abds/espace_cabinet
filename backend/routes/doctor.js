@@ -87,7 +87,7 @@ router.post('/answerMsg/:id',(req,res)=>{
 
 
 /////////////////////////////////////list Secret
-router.get('/listSec/:id',(req,res)=>{
+router.get('/listSec',(req,res)=>{
   secretere.find({id_doctor : null},(err,results)=>{
     if(err){console.log(err)}
     else{
@@ -96,11 +96,11 @@ router.get('/listSec/:id',(req,res)=>{
   })
 })
 
-router.post('/hireSec/:id',(req,res)=>{
-  doctor.findByIdAndUpdate({_id : req.body.id_doctor},{id_secrt : req.params.id},(err,results)=>{
+router.get('/hireSec/:id_sec/:id_doc',(req,res)=>{
+  doctor.findByIdAndUpdate({_id : req.params.id_doc},{id_secrt : req.params.id_sec},(err,results)=>{
     if(err){console.log(err)}
     else{
-      secretere.findByIdAndUpdate({_id  :  req.params.id},{id_doctor : results.id},(err,data)=>{
+      secretere.findByIdAndUpdate({_id  :  req.params.id_sec},{id_doctor : results.id},(err,data)=>{
         res.json('secretaire ajoutée')
       })
     }

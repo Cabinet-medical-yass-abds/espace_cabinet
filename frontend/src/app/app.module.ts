@@ -61,7 +61,7 @@ const appRoutes: Routes = [
         component: HomeComponent
       },
       {
-        path: 'secretaries/:id',
+        path: 'secretaries',
         component: SecretariesDoctorComponent
       }
     ]

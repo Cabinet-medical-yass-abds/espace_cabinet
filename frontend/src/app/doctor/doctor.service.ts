@@ -29,5 +29,13 @@ export class DoctorService {
     return this.http.get(`${this.url}/getDoc/`+id_doctor);
   }
 
+  listSecWitoutDoc(){
+    return this.http.get(`${this.url}/listSec`);
+  }
+
+  hireSecrt(id_sec , id_doc){
+    return this.http.get(`${this.url}/hireSec/`+id_sec+`/`+id_doc);
+  }
+
 
 }
