@@ -47,7 +47,7 @@ export class AdminService {
     return this.http.get(`${this.url}/listpatient`);
   }
 
-  //Claims 
+  // Claims 
   getAllClaims() {
     return this.http.get(`${this.url}/listclaim`);
   }
@@ -58,6 +58,11 @@ export class AdminService {
 
   deleteClaim(id_claim) {
     return this.http.get(`${this.url}/deleteclaim/`+id_claim);
+  }
+
+  // appois
+  getAllappois() {
+    return this.http.get(`${this.url}/getAllRv`);
   }
 
 }
