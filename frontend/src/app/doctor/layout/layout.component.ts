@@ -37,13 +37,9 @@ export class LayoutDoctorComponent implements OnInit {
     f.value._id = this.myDoctor._id;
     f.value.man = this.myDoctor.man;
     if (f.value.newPassword != '') {
-      console.log('not vide');
       f.value.password = f.value.newPassword;
     }
     delete f.value.newPassword;
-
-    console.log('f.value',f.value);
-    f.value.password = this.myDoctor.password;
     this.doctor.UpateDoctor(f.value).subscribe((data: any) => {
       localStorage.setItem('doctor', JSON.stringify(data)); 
     });
