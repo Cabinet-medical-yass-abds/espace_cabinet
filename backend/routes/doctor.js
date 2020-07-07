@@ -37,7 +37,6 @@ router.post('/loginDoctor',(req,res)=>{
   doctor.findOne({email : req.body.email},(err,results)=>{
     if (err){console.log(err)}
     else{
-      console.log(results)
       if(!results){
         res.json('Docteur introuvable !')
       }else{
@@ -125,8 +124,8 @@ router.get('/listConsult/:id',(req,res)=>{
   }).populate('id_patient').populate('id_appointment')
 })
 
-router.post('/updateConsul/:id',upload.single('myfile'),(req,res)=>{
-  consultation.findByIdAndUpdate({_id : req.body.id_doctor},{
+router.post('/updateConsul/:id_doc/:id_cons',upload.single('myfile'),(req,res)=>{
+  consultation.findByIdAndUpdate({_id : req.prams.id_cons},{
     $push : { files : req.file.filename}
   },(err,results)=>{
       res.json('File added !')
