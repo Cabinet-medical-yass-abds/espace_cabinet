@@ -91,7 +91,7 @@ router.get('/listMsg/:id',(req,res)=>{
   message.find({id_doctor : req.params.id},(err,results)=>{
     if(err){console.log(err)}
     else{
-      req.json(results)
+      res.json(results)
     }
   }).populate('id_patient')
 })
