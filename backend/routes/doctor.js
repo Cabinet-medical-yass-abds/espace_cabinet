@@ -31,7 +31,30 @@ router.post('/registerDoctor',(req,res)=>{
     else{res.json(data)}
   })
 })
-
+///////////////////////////////////////////////////////// Update Profile
+router.post('/updateProfile/:id',(req,res)=>{
+  doctor.findByIdAndUpdate({_id :req.params.id},{
+    nom : req.body.nom,
+    prenom : req.body.prenom,
+    email : req.body.email,
+    password : doctor.generateHash(req.body.password),
+    adress : {
+      city : req.body.city,
+      street : req.body.street,
+      zip : req.body.zip
+    },
+    numtel : req.body.numtel,
+    man  : req.body.man,
+    spec : req.body.spec,
+    bio : req.body.bio,
+  },(err,results)=>{
+    if(err) {
+      console.log(err)
+    }else{
+      res.json(results)
+    }
+  })
+})
 ///////////////////////////////////////////////////////// Login Doctor
 router.post('/loginDoctor',(req,res)=>{
   doctor.findOne({email : req.body.email},(err,results)=>{
