@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { LoginSecretaryComponent } from './secretary/login-secretary/login-secretary.component';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 
@@ -26,6 +25,9 @@ import { ClaimsComponent } from './admin/claims/claims.component';
 import { LayoutDoctorComponent } from './doctor/layout/layout.component';
 import { HomeComponent } from './doctor/home/home.component';
 import { SecretariesDoctorComponent } from './doctor/secretaries/secretaries.component';
+import { LayoutSecComponent } from './secretary/layout-sec/layout-sec.component';
+import { HomeSecComponent } from './secretary/home-sec/home-sec.component';
+import { RendezvousSecComponent } from './secretary/rendezvous-sec/rendezvous-sec.component';
 
 registerLocaleData(localeFr, 'fr');
 const appRoutes: Routes = [
@@ -66,14 +68,16 @@ const appRoutes: Routes = [
       }
     ]
   },
-  { path : 'secretary' , component : LoginSecretaryComponent }
+  { path : 'secretary' , component : LayoutSecComponent , children : [
+    { path  : 'home/:id' , component : HomeSecComponent},
+    { path  : 'Rendezvous' , component : RendezvousSecComponent}
+  ]}  
 ];
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginSecretaryComponent,
     LandingComponent,
     DashboardComponent,
     LayoutComponent,
@@ -83,7 +87,10 @@ const appRoutes: Routes = [
     ClaimsComponent,
     HomeComponent,
     LayoutDoctorComponent,
-    SecretariesDoctorComponent
+    SecretariesDoctorComponent,
+    LayoutSecComponent,
+    HomeSecComponent,
+    RendezvousSecComponent
   ],
   imports: [
     BrowserModule,

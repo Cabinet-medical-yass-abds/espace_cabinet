@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import { Router } from '@angular/router';
 import { DoctorService } from '../doctor/doctor.service';
+import {SecretaryService} from '../secretary/secretary.service';
+
 declare var $: any;
 
 @Component({
@@ -11,7 +13,7 @@ declare var $: any;
 })
 export class LandingComponent implements OnInit {
 
-  constructor(private router: Router,private doctor : DoctorService) { }
+  constructor(private router: Router,private doctor : DoctorService , private sec : SecretaryService) { }
 
   emailAdmin = 'admin@cabinet.tn';
   passwordAdmin = 'admin';
@@ -32,6 +34,7 @@ export class LandingComponent implements OnInit {
     }
   }
 
+  ////////////////////////////////////////////////DOC auth
   onSubmitDoctor(f: NgForm) {
     console.log('f.value',f.value);
     this.doctor.LoginDoctor(f.value).subscribe((data: any) => {
@@ -59,5 +62,34 @@ export class LandingComponent implements OnInit {
       }
     })
   }
+
+
+  ////////////////////////////////////////////////SECR auth
+  onSubmitSec(f: NgForm) {
+    console.log('f.value',f.value);
+    this.sec.loginSec(f.value).subscribe((data: any) => {
+      if (data._id != undefined) {
+        $('#LoginSec').modal('hide');
+        localStorage.setItem('secretary', JSON.stringify(data)); 
+        this.router.navigate(['secretary/home/'+data._id]);
+      }else {
+        this.alertMessageDoctor = data;
+      }
+    })
+  }
+
+  onSubmitSecRegister(f : NgForm){
+    this.sec.RegisterSec(f.value).subscribe((data: any) => {
+      if (data._id != undefined) {
+        $('#RegisterSec').modal('hide');
+        localStorage.setItem('secretary', JSON.stringify(data)); 
+        this.router.navigate(['secretary/home/'+data._id]);
+      }else {
+        this.alertMessageDoctor = data;
+      }
+    })
+  }
+
+  
 
 }

@@ -15,9 +15,9 @@ router.post('/registerSec',(req,res)=>{
       numtel : req.body.numtel,
       id_doctor : null
     })
-    sec.save((err)=>{
+    sec.save((err , data)=>{
       if(err){console.log(err)}
-      else{res.json('secretary added')}
+      else{res.json(data)}
     })
 })
  ////////////////////////////////////////////////////////////////login 
@@ -60,7 +60,7 @@ router.post('/acceptRv/:id',(req,res)=>{
 })
 
 ////////////////////////////////////////////////////////////////cancel RV
-router.post('/cancelRv/:id',(req,res)=>{
+router.get('/cancelRv/:id',(req,res)=>{
     appointement.findByIdAndUpdate({_id : req.params.id},{
         cancel : true
     },(err)=>{
