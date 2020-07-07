@@ -124,7 +124,7 @@ router.get('/listConsult/:id',(req,res)=>{
   }).populate('id_patient').populate('id_appointment')
 })
 
-router.post('/updateConsul/:id_doc/:id_cons',upload.single('myfile'),(req,res)=>{
+router.get('/updateConsul/:id_doc/:id_cons',upload.single('myfile'),(req,res)=>{
   consultation.findByIdAndUpdate({_id : req.prams.id_cons},{
     $push : { files : req.file.filename}
   },(err,results)=>{
