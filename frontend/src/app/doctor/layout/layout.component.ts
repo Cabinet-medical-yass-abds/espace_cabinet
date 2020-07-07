@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DoctorService } from '../doctor.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { doctor } from 'src/app/doctor.model';
+import { NgForm } from '@angular/forms';
 declare var $: any;
 
 @Component({
@@ -32,6 +33,21 @@ export class LayoutDoctorComponent implements OnInit {
     localStorage.clear();
   }
 
+  onUpdateDoctor(f:NgForm) {
+    f.value._id = this.myDoctor._id;
+    f.value.man = this.myDoctor.man;
+    if (f.value.newPassword != '') {
+      console.log('not vide');
+      f.value.password = f.value.newPassword;
+    }
+    delete f.value.newPassword;
+
+    console.log('f.value',f.value);
+    f.value.password = this.myDoctor.password;
+    this.doctor.UpateDoctor(f.value).subscribe((data: any) => {
+      localStorage.setItem('doctor', JSON.stringify(data)); 
+    });
+  }
   // getDoctorById() {
   //   this.route.params.subscribe(params => {
   //     console.log(params) //log the entire params object

@@ -7,7 +7,7 @@ const bcrypt = require('bcryptjs');
 const doctorSchema = new Schema({
     nom : String,
     prenom : String ,
-    email: { type: String, unique: true, lowercase: true },
+    email: { type: String, lowercase: true },
     password: String,
     adress: {
         street: String,

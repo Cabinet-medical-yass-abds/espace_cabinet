@@ -21,6 +21,11 @@ export class DoctorService {
     return this.http.post(`${this.url}/registerDoctor/`,doctor);
   }
 
+  // Update Doctor 
+  UpateDoctor(doctor) {
+    return this.http.post(`${this.url}/updateProfile/`+doctor._id,doctor);
+  }
+
   // Listing secretaries 
   getSecretaries(doc_id) {
     return this.http.get(`${this.url}/allSecretaries/`+doc_id);
