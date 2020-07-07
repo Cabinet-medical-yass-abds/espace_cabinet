@@ -58,7 +58,7 @@ router.get('/getDoc/:id',(req,res)=>{
     else{
       res.json(results)
     }
-  })
+  }).populate('id_secrt');
 })
 
 

@@ -30,9 +30,10 @@ export class SecretariesDoctorComponent implements OnInit {
     this.loadAllSecretaries();
     this.myDoctor =  JSON.parse(localStorage.getItem('doctor'));  
     this.doc_id = this.myDoctor._id;
+    this.getDoctorById();
   }
 
-  loadAllSecretaries() {
+  loadAllSecretaries() { 
     this.doctor.listSecWitoutDoc().subscribe((data: secretary []) => {
       this.secretaries = data;
       console.log('secretaries:',data);
@@ -43,8 +44,14 @@ export class SecretariesDoctorComponent implements OnInit {
       }
     })
   }
+  getDoctorById() {
+    this.doctor.getDoctorById(this.doc_id).subscribe((data: any) => {
+      console.log('data:',data);
+      localStorage.setItem('doctor', JSON.stringify(data)); 
+    })
+  }
 
-   // Click to show doctor informations 
+   // Click to show secretary informations 
    SecretaryInfo(Secretary) {
     this.mySecretary = Secretary;
     console.log('this.mySecretary:',this.mySecretary);
@@ -52,10 +59,17 @@ export class SecretariesDoctorComponent implements OnInit {
 
   hire(sec_id , id_doc){
     this.doctor.hireSecrt(sec_id  , id_doc).subscribe(()=>{
-      this.loadAllSecretaries();
+      this.getDoctorById();
+      window.location.reload();
     });
   }
- 
+  unhire(sec_id,id_doc){
+    this.doctor.unhireSecrt(sec_id  , id_doc).subscribe(()=>{
+      this.getDoctorById();
+      window.location.reload();
+    });
+  }
+
 
   /*  onSubmit(f: NgForm) {
     console.log(f.value); 

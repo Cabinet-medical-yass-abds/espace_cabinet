@@ -42,5 +42,9 @@ export class DoctorService {
     return this.http.get(`${this.url}/hireSec/`+id_sec+`/`+id_doc);
   }
 
+  unhireSecrt(id_sec , id_doc){
+    return this.http.get(`${this.url}/unhire/`+id_sec+`/`+id_doc);
+  }
+
 
 }
