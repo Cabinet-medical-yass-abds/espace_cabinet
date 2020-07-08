@@ -33,6 +33,7 @@ router.post('/registerDoctor',(req,res)=>{
 })
 ///////////////////////////////////////////////////////// Update Profile
 router.post('/updateProfile/:id',(req,res)=>{
+  console.log('my body:',req.body);
   doctor.findByIdAndUpdate({_id :req.params.id},{
     nom : req.body.nom,
     prenom : req.body.prenom,
@@ -95,7 +96,7 @@ router.get('/listMsg/:id',(req,res)=>{
     else{
       res.json(results)
     }
-  }).populate('id_patient')
+  }).populate('id_patient').populate('id_doctor')
 })
 
 router.post('/answerMsg/:id',(req,res)=>{

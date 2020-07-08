@@ -51,5 +51,12 @@ export class DoctorService {
     return this.http.get(`${this.url}/unhire/`+id_sec+`/`+id_doc);
   }
 
+  GetDoctorMessages(id_doctor) {
+    return this.http.get(`${this.url}/listMsg/`+id_doctor);
+  }
+
+  DoctorAnswerPatient(msg,id_message) {
+    return this.http.post(`${this.url}/answerMsg/`+id_message,msg);
+  }
 
 }
