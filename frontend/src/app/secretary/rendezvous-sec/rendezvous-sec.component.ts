@@ -21,6 +21,7 @@ export class RendezvousSecComponent implements OnInit {
     this.listOwnRv(this.HerDocId);
   }
 
+ 
   myRV;
   listOwnRv(HerDocId){
     this.sec.ListRv(HerDocId).subscribe((data: any)=>{
@@ -29,15 +30,18 @@ export class RendezvousSecComponent implements OnInit {
     })
   }
 
+  message ;
   OnSubmitAccept(id ,f: NgForm){
     this.sec.AcceptRV(id,f.value).subscribe((data : any)=>{
       console.log(data)
+      //this.message = data
     })
   }
 
   Cancel(id){
     this.sec.CancelRV(id).subscribe((data : any)=>{
       console.log(data)
+      //this.message = data
     })
   }
 

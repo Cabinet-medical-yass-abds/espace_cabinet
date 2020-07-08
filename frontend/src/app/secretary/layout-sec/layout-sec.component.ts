@@ -10,6 +10,7 @@ export class LayoutSecComponent implements OnInit {
   constructor() { }
   Secretary;
   name;
+  myid;
   ngOnInit(): void {
     $("#menu-toggle").click(function(e) {
       console.log('im here');
@@ -19,6 +20,7 @@ export class LayoutSecComponent implements OnInit {
 
     this.Secretary =  JSON.parse(localStorage.getItem('secretary'));  
     this.name = this.Secretary.nom;
+    this.myid = this.Secretary._id;
   }
 
 }

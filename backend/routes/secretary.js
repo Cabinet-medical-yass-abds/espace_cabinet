@@ -38,6 +38,25 @@ router.post('/loginSec',(req,res)=>{
         }
     }).populate('id_doctor')
 })
+
+///////////////////////////////////////////////////////// Update Profile
+router.post('/updateProfile/:id',(req,res)=>{
+    console.log(req.params.id)
+    secrt.findByIdAndUpdate({_id :req.params.id},{
+      nom : req.body.nom,
+      prenom : req.body.prenom,
+      email : req.body.email,
+      password : secrt.generateHash(req.body.password),
+      numtel : req.body.numtel,
+    },(err,results)=>{
+      if(err) {
+        console.log(err)
+      }else{
+        console.log(results)
+        res.json(results)
+      }
+    })
+  })
 ////////////////////////////////////////////////////////////////list Rv
 router.get('/listRv/:id',(req,res)=>{
     appointement.find({id_doctor : req.params.id},(err,results)=>{

@@ -17,6 +17,10 @@ export class SecretaryService {
   RegisterSec(Secrt){
     return this.http.post(`${this.url}/registerSec/`,Secrt);
   }
+  UpdateSec(id,Secrt){
+    console.log(id)
+    return this.http.post(`${this.url}/updateProfile/`+id ,Secrt);
+  }
   //List RV Secretary
   ListRv(id){
     return this.http.get(`${this.url}/listRv/`+id);

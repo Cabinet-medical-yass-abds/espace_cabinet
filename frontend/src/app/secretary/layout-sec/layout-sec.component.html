@@ -3,11 +3,13 @@
     <div class="bg-light border-right" id="sidebar-wrapper">
         <div class="sidebar-heading">Secretaire</div>
         <div class="list-group list-group-flush">
-            <a routerLink="/admin/dashboard" class="list-group-item list-group-item-action bg-light"><i class="fa fa-tachometer" aria-hidden="true"></i>&nbsp; Dashboard</a>
-            <a routerLink='/secretary/Rendezvous' class="list-group-item list-group-item-action bg-light"><i class="fa fa-user-md" aria-hidden="true"></i>&nbsp; Mes Rendez Vous</a>
-            <a routerLink="/admin/secretaries" class="list-group-item list-group-item-action bg-light"><i class="fa fa-users" aria-hidden="true"></i>&nbsp; Liste des sécretaires</a>
+            <a routerLink="/secretary/home/{{myid}}"class="list-group-item list-group-item-action bg-light"><i class="fa fa-tachometer" aria-hidden="true"></i>&nbsp; Dashboard</a>
+            <button routerLink='/secretary/Rendezvous' *ngIf="Secretary.id_doctor != null"   class="list-group-item list-group-item-action bg-light"><i class="fa fa-user-md" aria-hidden="true"></i>&nbsp; Mes Rendez Vous</button>
+            <button routerLink='/secretary/Rendezvous' *ngIf="Secretary.id_doctor == null" disabled  class="list-group-item list-group-item-action bg-light"><i class="fa fa-user-md" aria-hidden="true"></i>&nbsp; Mes Rendez Vous</button>
+            
+            <!-- <a routerLink="/admin/secretaries" class="list-group-item list-group-item-action bg-light"><i class="fa fa-users" aria-hidden="true"></i>&nbsp; Liste des sécretaires</a>
             <a routerLink="/admin/patients" class="list-group-item list-group-item-action bg-light"><i class="fa fa-user-o" aria-hidden="true"></i>&nbsp; Liste des patients</a>
-            <a routerLink="/admin/claims" class="list-group-item list-group-item-action bg-light"><i class="fa fa-bullhorn" aria-hidden="true"></i>&nbsp; Liste des réclamations</a>
+            <a routerLink="/admin/claims" class="list-group-item list-group-item-action bg-light"><i class="fa fa-bullhorn" aria-hidden="true"></i>&nbsp; Liste des réclamations</a> -->
         </div>
     </div>
     <!-- /#sidebar-wrapper -->
