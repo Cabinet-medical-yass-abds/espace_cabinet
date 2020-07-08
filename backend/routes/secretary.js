@@ -41,7 +41,6 @@ router.post('/loginSec',(req,res)=>{
 
 ///////////////////////////////////////////////////////// Update Profile
 router.post('/updateProfile/:id',(req,res)=>{
-    console.log(req.params.id)
     secrt.findByIdAndUpdate({_id :req.params.id},{
       nom : req.body.nom,
       prenom : req.body.prenom,
@@ -52,8 +51,9 @@ router.post('/updateProfile/:id',(req,res)=>{
       if(err) {
         console.log(err)
       }else{
-        console.log(results)
-        res.json(results)
+        secrt.findById({_id : results.id},(err,data)=>{
+            res.json(data)
+        }).populate('id_doctor')
       }
     })
   })

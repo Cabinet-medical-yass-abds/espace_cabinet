@@ -51,7 +51,9 @@ router.post('/updateProfile/:id',(req,res)=>{
     if(err) {
       console.log(err)
     }else{
-      res.json(results)
+      doctor.findById({_id : results.id},(err,data)=>{
+        res.json(data)
+      }).populate('id_secrt')
     }
   })
 })
