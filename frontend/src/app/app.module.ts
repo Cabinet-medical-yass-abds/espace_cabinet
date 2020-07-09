@@ -7,6 +7,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import {ReactiveFormsModule } from '@angular/forms'
 
 // search module
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
@@ -122,7 +123,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
     Ng2SearchPipeModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
     
   ],
   providers: [],

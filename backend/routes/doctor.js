@@ -168,12 +168,15 @@ router.get('/archiveConsult/:id_cons',(req,res)=>{
   })
 })
 
-router.get('/updateConsul/:id_doc/:id_cons',upload.single('myfile'),(req,res)=>{
-  consultation.findByIdAndUpdate({_id : req.params.id_cons},{
-    $push : { files : req.file.filename}
-  },(err,results)=>{
-      res.json('File added !')
-  })
+router.post('/updateConsul/:id_cons',upload.single('file'),(req,res)=>{
+  console.log('request.body',req.body);
+  console.log('req.file',req.myFile);
+  console.log('req.file',req.File);
+  // consultation.findByIdAndUpdate({_id : req.params.id_cons},{
+  //   $push : { files : req.file.filename}
+  // },(err,results)=>{
+  //     res.json('File added !')
+  // })
 })
 
 router.get('/deleteConsult/:id',(req,res)=>{

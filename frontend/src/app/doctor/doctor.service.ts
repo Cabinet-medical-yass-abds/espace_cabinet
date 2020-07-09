@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,6 @@ export class DoctorService {
 
   constructor(private http:HttpClient) { }
   url = 'http://localhost:3000/doctor';
-
 
 
   // Login doctor 
@@ -72,6 +71,11 @@ export class DoctorService {
   // Archive consultation 
   archiveConsultation(id_consultation) {
     return this.http.get(`${this.url}/archiveConsult/`+id_consultation);
+  }
+
+  AddfileConsultation(file,id_consultation) {
+    console.log('my file:',file);
+    return this.http.post(`${this.url}/updateConsul/`+id_consultation,file);
   }
 
   
