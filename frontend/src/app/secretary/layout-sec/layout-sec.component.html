@@ -4,9 +4,14 @@
         <div class="sidebar-heading">Secretaire</div>
         <div class="list-group list-group-flush">
             <a routerLink="/secretary/home/{{myid}}"class="list-group-item list-group-item-action bg-light"><i class="fa fa-tachometer" aria-hidden="true"></i>&nbsp; Acceuil</a>
-            <button routerLink='/secretary/Rendezvous' *ngIf="Secretary.id_doctor != null"   class="list-group-item list-group-item-action bg-light"><i class="fa fa-user-md" aria-hidden="true"></i>&nbsp; Mes Rendez Vous</button>
             <button routerLink='/secretary/Rendezvous' *ngIf="Secretary.id_doctor == null" disabled  class="list-group-item list-group-item-action bg-light"><i class="fa fa-user-md" aria-hidden="true"></i>&nbsp; Mes Rendez Vous</button>
-            
+            <button routerLink='/secretary/Rendezvous' *ngIf="Secretary.id_doctor != null" data-toggle="collapse" data-target="#collapseExample" class="list-group-item list-group-item-action bg-light"><i class="fa fa-user-md" aria-hidden="true"></i>&nbsp; Mes Rendez Vous</button>
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body" style="padding : 0.25rem;">
+                    <a routerLink="/secretary/acceptedRV"class="list-group-item list-group-item-action bg-light"><i class="fa fa-check-circle"></i>&nbsp; RV Acceptés</a>
+                    <a routerLink="/secretary/canceledRV"class="list-group-item list-group-item-action bg-light"><i class="fa fa-times"></i>&nbsp; RV Annulés</a>
+                </div>
+            </div>
             <!-- <a routerLink="/admin/secretaries" class="list-group-item list-group-item-action bg-light"><i class="fa fa-users" aria-hidden="true"></i>&nbsp; Liste des sécretaires</a>
             <a routerLink="/admin/patients" class="list-group-item list-group-item-action bg-light"><i class="fa fa-user-o" aria-hidden="true"></i>&nbsp; Liste des patients</a>
             <a routerLink="/admin/claims" class="list-group-item list-group-item-action bg-light"><i class="fa fa-bullhorn" aria-hidden="true"></i>&nbsp; Liste des réclamations</a> -->

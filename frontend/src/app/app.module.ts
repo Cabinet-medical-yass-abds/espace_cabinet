@@ -31,6 +31,8 @@ import { RendezvousSecComponent } from './secretary/rendezvous-sec/rendezvous-se
 import { MessagesComponent } from './doctor/messages/messages.component';
 import { ConsultationsComponent } from './doctor/consultations/consultations.component';
 import { ArchivedConsComponent } from './doctor/archived-cons/archived-cons.component';
+import { AcceptedRVComponent } from './secretary/accepted-rv/accepted-rv.component';
+import { CanceledRVComponent } from './secretary/canceled-rv/canceled-rv.component';
 
 registerLocaleData(localeFr, 'fr');
 const appRoutes: Routes = [
@@ -85,7 +87,9 @@ const appRoutes: Routes = [
   },
   { path : 'secretary' , component : LayoutSecComponent , children : [
     { path  : 'home/:id' , component : HomeSecComponent},
-    { path  : 'Rendezvous' , component : RendezvousSecComponent}
+    { path  : 'Rendezvous' , component : RendezvousSecComponent},
+    { path  : 'acceptedRV' , component : AcceptedRVComponent},
+    { path  : 'canceledRV' , component : CanceledRVComponent}
   ]}  
 ];
 
@@ -108,7 +112,9 @@ const appRoutes: Routes = [
     RendezvousSecComponent,
     MessagesComponent,
     ConsultationsComponent,
-    ArchivedConsComponent
+    ArchivedConsComponent,
+    AcceptedRVComponent,
+    CanceledRVComponent
   ],
   imports: [
     BrowserModule,

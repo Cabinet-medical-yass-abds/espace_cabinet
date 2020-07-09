@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SecretaryService} from '../secretary.service';
 import { NgForm } from '@angular/forms';
-
+declare var $: any;
 @Component({
   selector: 'app-rendezvous-sec',
   templateUrl: './rendezvous-sec.component.html',
@@ -9,15 +9,15 @@ import { NgForm } from '@angular/forms';
 })
 export class RendezvousSecComponent implements OnInit {
 
-  constructor(private sec : SecretaryService) { }
+  constructor(private sec : SecretaryService ) { }
   Secretary;
   myid;
+  RV_id;
   HerDocId;
   ngOnInit(): void {
     this.Secretary =  JSON.parse(localStorage.getItem('secretary'));  
     this.myid = this.Secretary._id;
     this.HerDocId = this.Secretary.id_doctor._id
-    console.log(this.HerDocId)
     this.listOwnRv(this.HerDocId);
   }
 
@@ -25,24 +25,29 @@ export class RendezvousSecComponent implements OnInit {
   myRV;
   listOwnRv(HerDocId){
     this.sec.ListRv(HerDocId).subscribe((data: any)=>{
-      console.log(data)
-      //this.myRV = data
+      this.myRV = data
     })
   }
 
   message ;
   OnSubmitAccept(id ,f: NgForm){
     this.sec.AcceptRV(id,f.value).subscribe((data : any)=>{
-      console.log(data)
-      //this.message = data
+      this.message = data
+      $('#exampleModal').modal('hide');
+      this.listOwnRv(this.HerDocId)
     })
   }
 
+  danger ;
   Cancel(id){
     this.sec.CancelRV(id).subscribe((data : any)=>{
-      console.log(data)
-      //this.message = data
+      this.danger = data
+      this.listOwnRv(this.HerDocId)
     })
+  }
+
+  openModal(id){
+    this.RV_id = id
   }
 
 }

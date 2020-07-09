@@ -59,7 +59,7 @@ router.post('/updateProfile/:id',(req,res)=>{
   })
 ////////////////////////////////////////////////////////////////list Rv
 router.get('/listRv/:id',(req,res)=>{
-    appointement.find({id_doctor : req.params.id},(err,results)=>{
+    appointement.find({id_doctor : req.params.id },(err,results)=>{
         if(err){console.log(err)}
         else{
             res.json(results)
@@ -86,7 +86,6 @@ router.get('/cancelRv/:id',(req,res)=>{
         res.json('Rendez vous annulé')
     })
 })
-
 
   
 
