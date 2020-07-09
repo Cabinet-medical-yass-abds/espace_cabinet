@@ -18,7 +18,7 @@
             <div class="card-header" id="headingOne">
                 <h2 class="mb-0">
                     <a class="btn btn-link text-left text-dark" type="button" data-toggle="collapse" href="#collapseOne_{{message._id}}" aria-expanded="true" aria-controls="collapseOne">
-                        Conversation avec : {{message.id_patient.nom}} {{message.id_patient.prenom}}
+                        Conversation avec : <b>{{message.id_patient.nom | uppercase }} {{message.id_patient.prenom | uppercase}}</b>
                     </a>
                     <a class="btn btn-link pull-right text-left" type="button" data-toggle="collapse" href="#collapseOne_{{message._id}}" aria-expanded="true" aria-controls="collapseOne">
                         voir
