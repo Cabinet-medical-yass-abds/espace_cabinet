@@ -16,6 +16,7 @@ export class LayoutDoctorComponent implements OnInit {
   doctor_id;
   doctor_name;
   myDoctor: doctor;
+  alert;
   constructor(
     private doctor : DoctorService,
     private route: ActivatedRoute,
@@ -40,10 +41,15 @@ export class LayoutDoctorComponent implements OnInit {
       f.value.password = f.value.newPassword;
     }
     delete f.value.newPassword;
-    this.doctor.UpateDoctor(f.value).subscribe((data: any) => {
-      localStorage.setItem('doctor', JSON.stringify(data)); 
-      window.location.reload()
-    });
+    if (f.value.password != '') {
+      this.doctor.UpateDoctor(f.value).subscribe((data: any) => {
+        localStorage.setItem('doctor', JSON.stringify(data)); 
+        window.location.reload()
+      });
+    }else{
+      this.alert = 'Veuiller écrire votre ancien mot de passe pour effectuer le changement';
+    }
+    
   }
   // getDoctorById() {
   //   this.route.params.subscribe(params => {

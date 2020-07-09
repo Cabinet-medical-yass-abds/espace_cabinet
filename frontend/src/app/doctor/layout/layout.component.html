@@ -4,7 +4,8 @@
         <div class="sidebar-heading">ESPACE DOCTEUR</div>
         <div class="list-group list-group-flush">
             <a routerLink="/doctor/secretaries" class="list-group-item list-group-item-action bg-dark"><i class="fa fa-users" aria-hidden="true"></i>&nbsp; Liste des sécretaires</a>
-            <a href="#" class="list-group-item list-group-item-action bg-dark"><i class="fa fa-check-square-o" aria-hidden="true"></i>&nbsp; Mes consultations</a>
+            <a routerLink="/doctor/consultations" class="list-group-item list-group-item-action bg-dark"><i class="fa fa-check-square-o" aria-hidden="true"></i>&nbsp; Mes consultations</a>
+            <a routerLink="/doctor/archivedcons" class="list-group-item list-group-item-action bg-dark"><i class="fa fa-archive" aria-hidden="true"></i>&nbsp; Mes consultations archivées</a>
             <a routerLink="/doctor/messages" class="list-group-item list-group-item-action bg-dark"><i class="fa fa-envelope-o" aria-hidden="true"></i>&nbsp; Mes messages</a>
         </div>
     </div>
@@ -92,10 +93,13 @@
                                 <textarea class="form-control" id="bio" rows="3" name="bio" [(ngModel)]="myDoctor.bio" required></textarea>
                             </div>
                             <hr>
+                            <div class="alert alert-danger text-center" *ngIf="alert">
+                                {{alert}}
+                            </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Mot de passe actuel</label>
                                 <input type="password" class="form-control" id="exampleInputPassword1" name="password" ngModel required>
-                                <small class="text-danger">Veuiller écrire votre mot de passe pour effectuer le changement</small>
+                                <small class="text-danger">Veuiller écrire votre ancien mot de passe pour effectuer le changement</small>
                             </div>
 
                         </div>

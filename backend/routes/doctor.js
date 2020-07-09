@@ -144,14 +144,32 @@ router.get('/unhire/:id_sec/:id_doc',(req,res)=>{
 })
 
 ////////////////////////////////////Consultations
+// archived means consultation is done 
+// Get current consultations where archived is false 
 router.get('/listConsult/:id',(req,res)=>{
-  consult.find({id_doctor : req.params.id},(err,results)=>{
+  consult.find({id_doctor : req.params.id,archived : false},(err,results)=>{
     res.json(results)
   }).populate('id_patient').populate('id_appointment')
 })
 
+// Get current consultations where archived is true
+router.get('/listConsultArchived/:id',(req,res)=>{
+  consult.find({id_doctor : req.params.id,archived : true},(err,results)=>{
+    res.json(results)
+  }).populate('id_patient').populate('id_appointment')
+})
+
+// Archive consultation
+router.get('/archiveConsult/:id_cons',(req,res)=>{
+  console.log('req.params.id_cons:',req.params.id_cons);
+  consultation.findByIdAndUpdate({_id : req.params.id_cons},{ archived : true}
+    ,(err,results)=>{
+      res.json('consultation archived !');
+  })
+})
+
 router.get('/updateConsul/:id_doc/:id_cons',upload.single('myfile'),(req,res)=>{
-  consultation.findByIdAndUpdate({_id : req.prams.id_cons},{
+  consultation.findByIdAndUpdate({_id : req.params.id_cons},{
     $push : { files : req.file.filename}
   },(err,results)=>{
       res.json('File added !')

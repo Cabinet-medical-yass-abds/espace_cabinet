@@ -65,11 +65,7 @@
                         <input type="email" class="form-control" id="" aria-describedby="emailHelp" name="email"  [(ngModel)]="Secretary.email" required>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Ancien mot de passe</label>
-                        <input type="password" class="form-control" id="" name="password" ngModel  required>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Mot de passe</label>
+                        <label for="exampleInputPassword1">Nouveau mot de passe</label>
                         <input type="password" class="form-control" id="" name="newPassword" ngModel  required>
                     </div>
                     <hr>
@@ -80,6 +76,14 @@
                         <input type="text" class="form-control" placeholder="+216 .. " aria-label="Username" aria-describedby="basic-addon1" name="numtel"  [(ngModel)]="Secretary.numtel" required> 
                     </div>
                     <hr>
+                    <div class="alert alert-danger text-center" *ngIf="alert">
+                        {{alert}}
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Ancien mot de passe</label>
+                        <input type="password" class="form-control" id="" name="password" ngModel  required>
+                        <small class="text-danger">Veuiller écrire votre ancien mot de passe pour effectuer le changement</small>
+                    </div>
                 </div>
                 <div class="modal-footer text-center d-block">
                     <button type="submit" class="btn btn-outline-dark btn-block">Modifiez Vos infos</button>

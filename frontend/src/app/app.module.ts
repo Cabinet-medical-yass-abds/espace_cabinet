@@ -29,6 +29,8 @@ import { LayoutSecComponent } from './secretary/layout-sec/layout-sec.component'
 import { HomeSecComponent } from './secretary/home-sec/home-sec.component';
 import { RendezvousSecComponent } from './secretary/rendezvous-sec/rendezvous-sec.component';
 import { MessagesComponent } from './doctor/messages/messages.component';
+import { ConsultationsComponent } from './doctor/consultations/consultations.component';
+import { ArchivedConsComponent } from './doctor/archived-cons/archived-cons.component';
 
 registerLocaleData(localeFr, 'fr');
 const appRoutes: Routes = [
@@ -70,6 +72,14 @@ const appRoutes: Routes = [
       {
         path: 'messages',
         component: MessagesComponent
+      },
+      {
+        path: 'consultations',
+        component: ConsultationsComponent
+      },
+      {
+        path: 'archivedcons',
+        component: ArchivedConsComponent
       }
     ]
   },
@@ -96,7 +106,9 @@ const appRoutes: Routes = [
     LayoutSecComponent,
     HomeSecComponent,
     RendezvousSecComponent,
-    MessagesComponent
+    MessagesComponent,
+    ConsultationsComponent,
+    ArchivedConsComponent
   ],
   imports: [
     BrowserModule,

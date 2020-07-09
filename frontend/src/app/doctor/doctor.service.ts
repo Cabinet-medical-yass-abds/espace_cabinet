@@ -59,4 +59,21 @@ export class DoctorService {
     return this.http.post(`${this.url}/answerMsg/`+id_message,msg);
   }
 
+  // Get all doctor consultations ( not archived )
+  getAllConsultations(id_doctor) {
+    return this.http.get(`${this.url}/listConsult/`+id_doctor);
+  }
+
+  // Get all doctor consultations ( archived )
+  getAllArchivedConsultations(id_doctor) {
+    return this.http.get(`${this.url}/listConsultArchived/`+id_doctor);
+  }
+
+  // Archive consultation 
+  archiveConsultation(id_consultation) {
+    return this.http.get(`${this.url}/archiveConsult/`+id_consultation);
+  }
+
+  
+
 }

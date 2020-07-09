@@ -42,7 +42,7 @@ export class LandingComponent implements OnInit {
       if (data._id != undefined) {
         $('#LoginDoctor').modal('hide');
         localStorage.setItem('doctor', JSON.stringify(data)); 
-        this.router.navigate(['doctor/home/'+data._id]);
+        this.router.navigate(['doctor/secretaries/']);
       }else {
         this.alertMessageDoctor = data;
       }
@@ -56,7 +56,7 @@ export class LandingComponent implements OnInit {
       if (data._id != undefined) {
         $('#RegisterDoctor').modal('hide');
         localStorage.setItem('doctor', JSON.stringify(data)); 
-        this.router.navigate(['doctor/home/'+data._id]);
+        this.router.navigate(['doctor/secretaries/']);
       }else {
         this.alertMessageDoctor = data;
       }

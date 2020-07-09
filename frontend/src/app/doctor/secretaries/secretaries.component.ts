@@ -60,13 +60,16 @@ export class SecretariesDoctorComponent implements OnInit {
   hire(sec_id , id_doc){
     this.doctor.hireSecrt(sec_id  , id_doc).subscribe(()=>{
       this.getDoctorById();
+      this.loadAllSecretaries();
       window.location.reload();
     });
   }
   unhire(sec_id,id_doc){
     this.doctor.unhireSecrt(sec_id  , id_doc).subscribe(()=>{
       this.getDoctorById();
-      window.location.reload();
+      this.myDoctor.id_secrt = null;
+      this.loadAllSecretaries();
+      // window.location.reload();
     });
   }
 
