@@ -86,6 +86,7 @@ export class DoctorService {
     return this.http.post(`${this.url}/listPayment/`+id,test);
   }
 
-  
-
+  GetAllConsultations(id_doctor) {
+    return this.http.get(`${this.url}/GetAllConsultations/`+id_doctor);
+  }
 }

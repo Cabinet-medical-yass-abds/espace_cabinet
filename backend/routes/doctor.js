@@ -154,6 +154,15 @@ router.get('/unhire/:id_sec/:id_doc',(req,res)=>{
 
 ////////////////////////////////////Consultations
 // archived means consultation is done 
+
+
+// Get All consultations
+router.get('/GetAllConsultations/:id',(req,res)=>{
+  consult.find({id_doctor : req.params.id},(err,results)=>{
+    res.json(results)
+  }).populate('id_patient').populate('id_appointment')
+})
+
 // Get current consultations where archived is false 
 router.get('/listConsult/:id',(req,res)=>{
   consult.find({id_doctor : req.params.id,archived : false},(err,results)=>{
