@@ -52,45 +52,11 @@ export class DoctorsComponent implements OnInit {
     })
   }
 
-  // Add doctor
-  // onSubmit(f: NgForm) {
-  //   console.log(f.value); 
-  //   this.admin.addDoctor(f.value).subscribe(() => {
-  //     this.loadAllDoctors();
-  //     $('#AddDoctor').modal('hide');
-  //   })
-  // }
-
-  // Update doctor
-  // onUpdate(f: NgForm,doctor) {
-  //   console.log('doctor last:',doctor);
-  //   f.value.adress = {
-  //     city : f.value.city,
-  //     street : f.value.street,
-  //     zip : f.value.zip
-  //   }
-  //   f.value.man = f.value.sexe;
-  //   delete f.value.city;
-  //   delete f.value.street;
-  //   delete f.value.zip;
-  //   delete f.value.sexe;
-  //   delete f.value._id;
-  //   this.admin.updateDoctor(doctor).subscribe(() => {
-  //     this.loadAllDoctors();
-  //     $('#AddDoctor').modal('hide');
-  //   })
-  // }
-
-  // updateDoctor(doctor) {
-  //   console.log('doctor:',doctor);
-  //   this.doc_id = doctor._id;
-  //   this.doctor = doctor;
-  //   console.log('doctor:',this.doctor);
-  //   $('#AddDoctor').css({
-  //     'overflow-x': 'hidden',
-  //     'overflow-y': 'auto'
-  //   })
-  //   this.modify = true;
-  // }
+  accept(id_doctor) {
+    console.log('id_doctor:',id_doctor);
+    this.admin.acceptDoctor(id_doctor).subscribe(() => {
+      this.loadAllDoctors();
+    })
+  }
 
 }

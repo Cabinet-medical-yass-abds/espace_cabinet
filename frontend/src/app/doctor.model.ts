@@ -11,6 +11,7 @@ export interface doctor {
     },
     numtel :string,
     man: { type: Boolean ,default :true }, 
+    accepted: { type: Boolean ,default :false }, 
     spec: string,
     bio: string,
   id_secrt: {

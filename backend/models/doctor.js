@@ -16,6 +16,7 @@ const doctorSchema = new Schema({
     },
     numtel :String,
     man: { type: Boolean ,default :true }, 
+    accepted: { type: Boolean ,default :false }, 
     spec: String,
     bio: String,
     id_secrt: {

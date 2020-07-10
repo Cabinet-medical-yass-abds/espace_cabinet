@@ -27,6 +27,10 @@ export class AdminService {
     return this.http.post(`${this.url}/update/`+doctor.id_user._id,doctor);
   }
 
+  acceptDoctor(id_doctor) {
+    return this.http.get(`${this.url}/acceptDoctor/`+id_doctor);
+  }
+
   // Secretaries
   getAllSecretaries() {
     return this.http.get(`${this.url}/listAllSecretaries`);

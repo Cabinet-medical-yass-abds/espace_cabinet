@@ -15,6 +15,16 @@ router.get('/listAll', (req, res) => {
   }).populate('id_secrt')
 })
 
+router.get('/acceptDoctor/:id', (req, res,) => {
+  doctor.findByIdAndUpdate({_id : req.params.id},{accepted : true},(err)=>{
+    if (err) {
+      console.log(err)
+    }else{
+    res.json('doctor removed !!')
+    }
+  })
+})
+
 router.get('/delete/:id', (req, res,) => {
   doctor.findByIdAndDelete({_id : req.params.id},(err,data)=>{
     if (err) {
