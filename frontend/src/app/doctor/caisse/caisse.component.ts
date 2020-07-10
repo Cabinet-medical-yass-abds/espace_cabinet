@@ -19,13 +19,21 @@ export class CaisseComponent implements OnInit {
   }
 
   somme;
+  dateD;
+  dateF;
   getCaissePerdate(id,f : NgForm ){
-    this.doctor.listPayment(id , f.value).subscribe((data : any)=>{
+    console.log('f.value',f.value);
+    this.dateD = f.value.date+'T00:00:00.000+00:00';
+    this.dateF = f.value.date+'T23:59:59.000+00:00';
+    console.log('this.dateD:',this.dateD);
+    console.log('this.dateF',this.dateF);
+    this.doctor.listPayment(id , this.dateD,this.dateF).subscribe((data : any)=>{
       console.log(data)
-      /* this.somme = 0 ;
+      this.somme = 0 ;
       data.forEach(element => {
         this.somme += element.id_appointment.prix
-      }); */
+      }); 
+      console.log('somme:',this.somme);
     })
   }
 }

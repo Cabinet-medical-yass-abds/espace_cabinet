@@ -88,7 +88,7 @@ router.get('/getDoc/:id',(req,res)=>{
 
 /////////////////////////////////////// list payments
 router.post('/listPayment/:id',(req,res)=>{
-  consultation.find({id_doctor : req.params.id , createdAt : req.body.date},(err,data)=>{
+  consultation.find({id_doctor : req.params.id , createdAt : { $gte: req.body.dateD, $lte: req.body.dateF }},(err,data)=>{
     if(err){
       console.log(err)
     }else{
