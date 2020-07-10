@@ -34,6 +34,7 @@ import { ConsultationsComponent } from './doctor/consultations/consultations.com
 import { ArchivedConsComponent } from './doctor/archived-cons/archived-cons.component';
 import { AcceptedRVComponent } from './secretary/accepted-rv/accepted-rv.component';
 import { CanceledRVComponent } from './secretary/canceled-rv/canceled-rv.component';
+import { CaisseComponent } from './doctor/caisse/caisse.component';
 
 registerLocaleData(localeFr, 'fr');
 const appRoutes: Routes = [
@@ -83,6 +84,10 @@ const appRoutes: Routes = [
       {
         path: 'archivedcons',
         component: ArchivedConsComponent
+      },
+      {
+        path: 'caisse',
+        component: CaisseComponent
       }
     ]
   },
@@ -115,7 +120,8 @@ const appRoutes: Routes = [
     ConsultationsComponent,
     ArchivedConsComponent,
     AcceptedRVComponent,
-    CanceledRVComponent
+    CanceledRVComponent,
+    CaisseComponent
   ],
   imports: [
     BrowserModule,
