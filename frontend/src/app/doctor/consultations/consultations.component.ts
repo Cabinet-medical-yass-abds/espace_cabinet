@@ -20,6 +20,7 @@ export class ConsultationsComponent implements OnInit {
   id_const;
   myFile :any;
   uploadForm: FormGroup; 
+  formData = new FormData();
 
   ngOnInit(): void {
     this.uploadForm = this.formBuilder.group({
@@ -59,13 +60,9 @@ export class ConsultationsComponent implements OnInit {
     this.uploadForm.get('file').setValue(this.myFile);
   }
   onSubmit(id_const) {
-    let formData = new FormData();
     console.log(' this.uploadForm:', this.uploadForm.get('file').value);
-    formData.append('file', this.uploadForm.get('file').value);
-    console.log('formData:',formData);
-    console.log('idconst:',id_const);
-    console.log('FormData.get()',formData.get('file'));
-    this.doctor.AddfileConsultation(formData.get('file'),id_const).subscribe(() => {
+    this.formData.append('file', this.uploadForm.get('file').value);
+    this.doctor.AddfileConsultation(this.formData,id_const).subscribe(() => {
       this.loadAllConsultations();
     });
   }

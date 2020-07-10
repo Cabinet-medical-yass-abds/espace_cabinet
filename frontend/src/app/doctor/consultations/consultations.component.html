@@ -9,7 +9,7 @@
         <tr>
             <th scope="col" *ngIf='myConsultations?.length'></th>
             <th scope="col">Patient</th>
-            <th class="col">Email</th>
+            <th scope="col">Email</th>
             <th scope="col">Télephone</th>
             <th scope="col">Date</th>
             <th scope="col">Prix</th>
@@ -36,8 +36,8 @@
             </td>
             <ng-template #ExistFiles>
                 <td class="text-center">
-                    <div>
-                        <i class="fa fa-file-pdf-o" style="font-size:30px;"></i>
+                    <div *ngFor='let file of consultation.files'>
+                        <a href="http://localhost:4000/uploads/files/{{file.file}}" target="_blank"><i class="fa fa-file-pdf-o" style="font-size:30px;"></i></a>
                     </div>
                     <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#Addfile" (click)="getConstId(consultation._id)">
                         <i class="fa fa-plus-square-o"></i>
@@ -65,7 +65,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="exampleFormControlFile1">Votre fichier</label>
-                        <input type="file" class="form-control-file" id="exampleFormControlFile1" name="myfile"
+                        <input type="file" class="form-control-file" id="exampleFormControlFile1" name="file"
                         (change)="onFileSelected($event)">
                     </div>
                 </div>
