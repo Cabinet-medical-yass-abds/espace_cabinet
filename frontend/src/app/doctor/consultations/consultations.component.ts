@@ -4,6 +4,7 @@ import { DoctorService } from '../doctor.service';
 import { doctor } from 'src/app/doctor.model';
 import { NgForm } from '@angular/forms';
 import { FormBuilder, FormGroup } from '@angular/forms';
+declare var $: any;
 
 @Component({
   selector: 'app-consultations',
@@ -64,6 +65,7 @@ export class ConsultationsComponent implements OnInit {
     this.formData.append('file', this.uploadForm.get('file').value);
     this.doctor.AddfileConsultation(this.formData,id_const).subscribe(() => {
       this.loadAllConsultations();
+      $('#Addfile').modal('hide');
     });
   }
 
