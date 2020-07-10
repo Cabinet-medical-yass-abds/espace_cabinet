@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DoctorService } from '../doctor.service';
-
+declare var $: any;
 @Component({
   selector: 'app-caisse',
   templateUrl: './caisse.component.html',
@@ -23,8 +23,8 @@ export class CaisseComponent implements OnInit {
   dateF;
   getCaissePerdate(id,f : NgForm ){
     console.log('f.value',f.value);
-    this.dateD = f.value.date+'T00:00:00.000+00:00';
-    this.dateF = f.value.date+'T23:59:59.000+00:00';
+    this.dateD = f.value.dateD+'T00:00:00.000+00:00';
+    this.dateF = f.value.dateF+'T23:59:59.000+00:00';
     console.log('this.dateD:',this.dateD);
     console.log('this.dateF',this.dateF);
     this.doctor.listPayment(id , this.dateD,this.dateF).subscribe((data : any)=>{
