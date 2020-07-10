@@ -78,6 +78,10 @@ export class DoctorService {
     return this.http.post(`${this.url}/updateConsul/`+id_consultation,file);
   }
 
+  listPayment(id,date) {
+    return this.http.post(`${this.url}/listPayment/`+id,date);
+  }
+
   
 
 }

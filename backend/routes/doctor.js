@@ -86,7 +86,16 @@ router.get('/getDoc/:id',(req,res)=>{
   }).populate('id_secrt');
 })
 
-
+/////////////////////////////////////// list payments
+router.post('/listPayment/:id',(req,res)=>{
+  consultation.find({id_doctor : req.params.id , createdAt : req.body.date},(err,data)=>{
+    if(err){
+      console.log(err)
+    }else{
+      res.json(data)
+    }
+  }).populate('id_appointment').populate('id_patient')
+})
 
 
 /////////////////////////////////Messsages
