@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { DoctorService } from '../doctor.service';
 
 @Component({
   selector: 'app-caisse',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CaisseComponent implements OnInit {
 
-  constructor() { }
+  constructor(private doctor : DoctorService ) { }
 
+  myDoctor;
+  id_doc ;
   ngOnInit(): void {
+    this.myDoctor =  JSON.parse(localStorage.getItem('doctor'));
+    this.id_doc = this.myDoctor._id
   }
 
+  somme;
+  getCaissePerdate(id,f : NgForm ){
+    this.doctor.listPayment(id , f.value).subscribe((data : any)=>{
+      console.log(data)
+      /* this.somme = 0 ;
+      data.forEach(element => {
+        this.somme += element.id_appointment.prix
+      }); */
+    })
+  }
 }
