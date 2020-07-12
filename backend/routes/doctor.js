@@ -208,7 +208,7 @@ router.get('/deleteConsult/:id',(req,res)=>{
 
 // Get all appois doctor 
 router.get('/GetAllAppointments/:id',(req,res)=>{
-  appoi.find({id_doctor : req.params.id},(err,results)=>{
+  appoi.find({id_doctor : req.params.id,statue : true},(err,results)=>{
     res.json(results)
   }).populate('id_patient')
 })
