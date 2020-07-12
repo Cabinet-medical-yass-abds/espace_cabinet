@@ -4,6 +4,7 @@ const secretere = require('../models/secretere');
 const user = require('../models/user');
 const message = require('../models/message')
 const consult = require('../models/consultation')
+const appoi = require('../models/appointement')
 
 const upload = require('../config/multer_cofig');
 const consultation = require('../models/consultation');
@@ -203,6 +204,13 @@ router.get('/deleteConsult/:id',(req,res)=>{
   consultation.findByIdAndDelete({id_doctor : req.params.id},(err)=>{
     res.json('consultaion supprimée !')
   })
+})
+
+// Get all appois doctor 
+router.get('/GetAllAppointments/:id',(req,res)=>{
+  appoi.find({id_doctor : req.params.id},(err,results)=>{
+    res.json(results)
+  }).populate('id_patient')
 })
 
 module.exports = router;

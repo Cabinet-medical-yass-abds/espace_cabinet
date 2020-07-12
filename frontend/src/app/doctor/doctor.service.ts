@@ -89,4 +89,8 @@ export class DoctorService {
   GetAllConsultations(id_doctor) {
     return this.http.get(`${this.url}/GetAllConsultations/`+id_doctor);
   }
+
+  getAllAppointments(id_doctor) {
+    return this.http.get(`${this.url}/GetAllAppointments/`+id_doctor);
+  }
 }
