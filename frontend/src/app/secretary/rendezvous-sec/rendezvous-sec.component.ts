@@ -15,13 +15,14 @@ export class RendezvousSecComponent implements OnInit {
   RV_id;
   HerDocId;
   searchAppoi;
+  mydate ;
   ngOnInit(): void {
     this.Secretary =  JSON.parse(localStorage.getItem('secretary'));  
     this.myid = this.Secretary._id;
     this.HerDocId = this.Secretary.id_doctor._id
     this.listOwnRv(this.HerDocId);
   }
-
+  
  
   myRV;
   listOwnRv(HerDocId){
@@ -47,8 +48,9 @@ export class RendezvousSecComponent implements OnInit {
     })
   }
 
-  openModal(id){
+  openModal(id, date){
     this.RV_id = id
+    this.mydate = date
   }
 
 }

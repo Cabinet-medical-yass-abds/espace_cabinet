@@ -14,6 +14,7 @@
       <th scope="col">Email</th>
       <th scope="col">Télephone</th>
       <th scope="col">Sexe</th>
+      <th scope="col">Date</th>
       <th scope="col">Gérer</th>
     </tr>
   </thead>
@@ -25,8 +26,9 @@
       <td *ngIf="(rv.statue == false) && (rv.cancel == false)">{{rv.id_patient.numtel}}</td>
       <td *ngIf="(rv.statue == false) && (rv.cancel == false) && (rv.id_patient.man)">Homme</td>
       <td *ngIf="(rv.statue == false) && (rv.cancel == false) && (!rv.id_patient.man)">Femme</td>
+      <td *ngIf="(rv.statue == false) && (rv.cancel == false)">{{rv.date | date : 'medium' : '':'fr' }}</td>
       <td *ngIf="(rv.statue == false) && (rv.cancel == false)">
-        <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" (click)="openModal(rv._id)"
+        <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" (click)="openModal(rv._id,rv.date)"
           id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fa fa-cogs"></i>
         </button>
@@ -57,7 +59,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Accepter un rendez vous</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -66,10 +68,9 @@
         <form #f6="ngForm" (ngSubmit)="OnSubmitAccept(RV_id,f6)">
           <div class="form-group">
             <label for="">Date de disponibilité</label>
-            <input type="date" name="date" id="" class="form-control" placeholder="" aria-describedby="helpId" ngModel>
+            <input type="datetime-local" name="date" disabled id="" class="form-control" placeholder="" aria-describedby="helpId" [(ngModel)]='mydate'>
           </div>
           <div class="input-group mb-3">
-            <!-- <label for="">Prix</label> -->
             <input type="text" class="form-control" placeholder="Prix" aria-label="Username" name="prix"
               aria-describedby="basic-addon1" ngModel>
             <div class="input-group-prepend">

@@ -70,7 +70,6 @@ router.get('/listRv/:id',(req,res)=>{
 ////////////////////////////////////////////////////////////////accepter RV
 router.post('/acceptRv/:id',(req,res)=>{
     appointement.findByIdAndUpdate({_id : req.params.id},{
-        date : req.body.date,
         prix : req.body.prix,
         statue : true
     },(err)=>{
