@@ -14,6 +14,7 @@ export class RendezvousSecComponent implements OnInit {
   myid;
   RV_id;
   HerDocId;
+  searchAppoi;
   ngOnInit(): void {
     this.Secretary =  JSON.parse(localStorage.getItem('secretary'));  
     this.myid = this.Secretary._id;

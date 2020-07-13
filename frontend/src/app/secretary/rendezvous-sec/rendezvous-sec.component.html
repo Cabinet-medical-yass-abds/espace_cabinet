@@ -4,6 +4,9 @@
   <small>* Lister les Rendez vous pas encore traiter</small><br>
   <small>** Gestionaire de rendez vous pour Docteur : {{Secretary.id_doctor.nom}} {{Secretary.id_doctor.nom}}</small>
 </div>
+<div class="search-hero mb-3">
+  <input class="form-control" type="text" name="search" [(ngModel)]="searchAppoi" autocomplete="off" placeholder="Chercher un rendez-vous . . .">
+</div>
 <table class="table table-hover">
   <thead class="thead-dark">
     <tr>
@@ -15,7 +18,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let rv of myRV">
+    <tr *ngFor="let rv of myRV | filter: searchAppoi">
       <td *ngIf="(rv.statue == false) && (rv.cancel == false)" scope="row">{{rv.id_patient.nom}}
         {{rv.id_patient.prenom}}</td>
       <td *ngIf="(rv.statue == false) && (rv.cancel == false)">{{rv.id_patient.email}}</td>

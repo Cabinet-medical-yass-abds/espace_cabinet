@@ -11,6 +11,7 @@
             <th scope="col">Email</th>
             <th scope="col">Télephone</th>
             <th scope="col">Date</th>
+            <th scope="col">Paiment</th>
         </tr>
     </thead>
     <tbody>
@@ -19,6 +20,10 @@
             <td>{{appoi.id_patient.email }}</td>
             <td>{{appoi.id_patient.numtel }}</td>
             <td>{{appoi.date| date : 'medium' : '':'fr' }}</td>
+            <td *ngIf='appoi.payed; else Nonpaid' class="text-center"><span class="badge badge-success">Payé</span></td>
+            <ng-template #Nonpaid>
+                <td class="text-center"><span class="badge badge-danger">Non payé</span></td>
+            </ng-template>
         </tr>
     </tbody>
 </table>
