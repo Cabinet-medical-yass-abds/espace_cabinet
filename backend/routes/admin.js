@@ -112,92 +112,37 @@ router.get('/getAllRv',(req,res)=>{
   })
 })
 
+///////////////////check email exists
+router.post('/existEmail',async(req,res)=>{
+  var dispo = {
+    patient : false,
+    doc : false ,
+    secretary : false
+  }
+  try{
+    var checkuser = await user.findOne({email : req.body.email})
+    var checkdoc = await doctor.findOne({email : req.body.email})
+    var checksec = await secretere.findOne({email : req.body.email})
+    
+    if(checkuser){
+      dispo.patient = true
+    }
+    if(checkdoc){
+      dispo.doc = true
+    }
+    if(checksec){
+      dispo.secretary = true
+    }
+
+    res.json(dispo)
+}catch(ex){
+    console.log('error',ex)
+}
+})
+
+
 module.exports = router;
 
 
 
 
-
-/* router.post('/addOne', (req, res) => {
-  var doc = new doctor({
-    nom : req.body.nom,
-    prenom : req.body.prenom,
-    email : req.body.email,
-    password : user.generateHash(req.body.password),
-    adress : {
-      city : req.body.city,
-      street : req.body.street,
-      zip : req.body.zip
-    },
-    numtel : req.body.numtel,
-    man  : req.body.man ,
-    spec : req.body.spec,
-    bio : req.body.bio,
-    id_secrt : '' 
-  })
-  doc.save((err)=>{
-    if(err){console.log(err)}
-    else{res.json('doctor added')}
-  })
-})
-
-
-router.post('/update/:id', (req, res, next) => {
-  let userr = req.body.id_user;
-  delete req.body.id_user;
-  req.body.id_user = userr._id;
-  let doc = req.body;
-  console.log('user :', userr);
-  doctor.updateOne({ id_user: userr._id }, { $set: doc }, function(err) {
-    if (err) {
-      console.log(err)
-      res.json('error');
-    } else {
-      console.log('my req body:', doc);
-      user.updateOne({ _id: userr._id }, { $set: userr }, function(err) {
-          if (err) {
-              console.log(err);
-              res.json('error');
-          } else {
-              res.json('Doctor updated !!,user updated');
-          }
-      })
-    }
-  });
-}); */
-
-/* router.post('/addOneSecretary', (req, res) => {
-  req.body.nom = req.body.name,
-  req.body.email = req.body.email 
-  req.body.password = user.generateHash(req.body.password);;
-  req.body.role = {
-    isSecretary : true
-  };
-  let userr = new user(req.body);
-  console.log(userr)
-  userr.save((err,user) => {
-    req.body.id_user = user._id;
-    let sec = new secretere(req.body)
-    sec.save((err) => {
-      if (err) {
-          console.log(err)
-          res.json('erreur')
-      } else {
-          res.json('doctor added !!')
-      }
-    })
-  });
-}) */
-
-/* router.post('/updateSec/:id', (req, res, next) => {
-  let userr = req.body.id_user;
-  console.log('user :', userr);
-  user.updateOne({ _id: userr._id }, { $set: userr }, function(err) {
-    if (err) {
-        console.log(err);
-        res.json('error');
-    } else {
-        res.json('Secretarry updated !!,user updated');
-    }
-  })
-}); */
