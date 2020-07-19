@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { doctor } from '../../doctor.model';
 import { AdminService } from '../admin.service';
-import {NgForm} from '@angular/forms';
 import { secretary } from 'src/app/secretary.model';
+import { FlashMessagesService } from 'angular2-flash-messages';
 declare var $: any;
 
 @Component({
@@ -12,7 +12,7 @@ declare var $: any;
 })
 export class DoctorsComponent implements OnInit {
 
-  constructor(private admin:AdminService) {}
+  constructor(private admin:AdminService,private _flashMessagesService: FlashMessagesService) {}
 
   ad : doctor [];
   secretaries : secretary [];
@@ -49,6 +49,7 @@ export class DoctorsComponent implements OnInit {
   deleteD(id) {
     this.admin.deleteDoctor(id).subscribe(() => {
       this.loadAllDoctors();
+      this._flashMessagesService.show('Docteur supprimé avec success', { cssClass: 'alert-success', timeout: 2000 });
     })
   }
 

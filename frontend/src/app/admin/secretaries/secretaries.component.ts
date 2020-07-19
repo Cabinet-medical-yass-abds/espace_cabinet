@@ -41,36 +41,12 @@ export class SecretariesComponent implements OnInit {
     console.log('this.mySecretary:',this.mySecretary);
   }
 
-  // onSubmit(f: NgForm) {
-  //   console.log(f.value);
-  //   f.value.nom = f.value.name;
-  //   f.value.prenom = f.value.fname;
-  //   delete f.value.fname;
-  //   delete f.value.name;
-  //   this.admin.addSecretary(f.value).subscribe(() => {
-  //     this.loadAllSecretaries();
-  //     $('#addSecretary').modal('hide');
-  //   })
-  // }
-  // onUpdate(f: NgForm,secretary) {
-  //   console.log('secretary;',secretary);
-  //   this.admin.updateSecretary(secretary).subscribe(() => {
-  //     this.loadAllSecretaries();
-  //     $('#addSecretary').modal('hide');
-  //   })
-  // }
-
    // Delete secretary by id
   deleteD(id) {
     this.admin.deleteSecretary(id).subscribe(() => {
       this.loadAllSecretaries();
+      $('#SecretaryModal').modal('hide');
     })
   }
-
-  // updateSecretary(secretary) {
-  //   console.log('secretary:',secretary);
-  //   this.secretary = secretary;
-  //   this.modify = true;
-  // }
 
 }

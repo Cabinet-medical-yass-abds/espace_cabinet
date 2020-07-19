@@ -30,10 +30,13 @@ router.get('/delete/:id', (req, res,) => {
     if (err) {
       console.log(err)
     }else{
-      console.log('my datya:',data);
-      secretere.findByIdAndUpdate({_id : data.id_secrt._id},{id_doctor : null},(err)=>{
+      if (data.id_secrt != null) {
+        secretere.findByIdAndUpdate({_id : data.id_secrt._id},{id_doctor : null},(err)=>{
+          res.json('doctor removed !!')
+        })
+      }else{
         res.json('doctor removed !!')
-      })
+      }     
     }
   }).populate('id_secrt')
 })
@@ -56,9 +59,14 @@ router.get('/deleteSec/:id', (req, res,next) => {
     if (err) {
       console.log(err)
     }else{
-      doctor.findByIdAndUpdate({_id : data.id_doctor._id},{id_secrt : null},(err)=>{
+      console.log('dataaaaa:',data);
+      if (data.id_doctor != null) {
+        doctor.findByIdAndUpdate({_id : data.id_doctor._id},{id_secrt : null},(err)=>{
+          res.json('secrt removed !!')
+        })
+      }else{
         res.json('secrt removed !!')
-      })
+      }
     }
   }).populate('id_doctor')
 })

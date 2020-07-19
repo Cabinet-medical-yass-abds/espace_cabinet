@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import {ReactiveFormsModule } from '@angular/forms'
+import { FlashMessagesModule } from 'angular2-flash-messages';
 
 // search module
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
@@ -133,6 +134,7 @@ const appRoutes: Routes = [
     BrowserModule,
     AppRoutingModule,
     RouterModule.forRoot(appRoutes),
+    FlashMessagesModule.forRoot(),
     HttpClientModule,
     Ng2SearchPipeModule,
     FormsModule,
