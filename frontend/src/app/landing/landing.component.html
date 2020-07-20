@@ -193,6 +193,9 @@ aria-hidden="true">
                 
                 <div class="modal-footer text-center d-block">
                     <button type="submit" class="btn btn-outline-dark">Créez votre compte</button>
+                    <div class="alert alert-danger mt-3" *ngIf='alertEmailExistDoctor != ""'>
+                        {{alertEmailExistDoctor}}
+                    </div>
                 </div>
             </form>
         </div>
@@ -279,6 +282,9 @@ aria-hidden="true">
                 </div>
                 <div class="modal-footer text-center d-block">
                     <button type="submit" class="btn btn-outline-dark">Créez votre compte</button>
+                    <div class="alert alert-danger mt-3" *ngIf='alertEmailSecretary != ""'>
+                        {{alertEmailSecretary}}
+                    </div>
                 </div>
             </form>
         </div>

@@ -69,4 +69,8 @@ export class AdminService {
     return this.http.get(`${this.url}/getAllRv`);
   }
 
+  checkExistEmail(data) {
+    return this.http.post(`${this.url}/existEmail`,data);
+  }
+
 }
