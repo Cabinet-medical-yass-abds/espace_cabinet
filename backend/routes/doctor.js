@@ -8,6 +8,7 @@ const appoi = require('../models/appointement')
 
 const upload = require('../config/multer_cofig');
 const consultation = require('../models/consultation');
+const notif = require('../models/notif');
 
 ///////////////////////////////////////////////////////// Register Doctor
 router.post('/registerDoctor',(req,res)=>{
@@ -29,7 +30,16 @@ router.post('/registerDoctor',(req,res)=>{
   })
   doc.save((err,data)=>{
     if(err){console.log(err)}
-    else{res.json(data)}
+    else{
+      var n = new notif ({
+        id_user : null,
+        admin  :true ,
+        body : "le docteur "+data.nom+" a envoyé une demande",
+        url : "http://localhost:4200/admin/doctors"
+      })
+      n.save((err)=>{})
+      res.json(data)
+    }
   })
 })
 ///////////////////////////////////////////////////////// Update Profile
@@ -161,14 +171,14 @@ router.get('/unhire/:id_sec/:id_doc',(req,res)=>{
 router.get('/GetAllConsultations/:id',(req,res)=>{
   consult.find({id_doctor : req.params.id},(err,results)=>{
     res.json(results)
-  }).populate('id_patient').populate('id_appointment')
+  }).populate('id_patient').populate('id_appointment').populate('id_doctor')
 })
 
 // Get current consultations where archived is false 
 router.get('/listConsult/:id',(req,res)=>{
   consult.find({id_doctor : req.params.id,archived : false},(err,results)=>{
     res.json(results)
-  }).populate('id_patient').populate('id_appointment')
+  }).populate('id_patient').populate('id_appointment').populate('id_doctor')
 })
 
 // Get current consultations where archived is true

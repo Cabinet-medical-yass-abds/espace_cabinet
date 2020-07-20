@@ -17,7 +17,15 @@ router.post('/registerSec',(req,res)=>{
     })
     sec.save((err , data)=>{
       if(err){console.log(err)}
-      else{res.json(data)}
+      else{
+        var n = new notif ({
+            id_user : null,
+            admin  :true ,
+            body : "la secretaire "+data.nom+" a envoyé une demande d'inscription",
+            url : "http://localhost:4200/admin/secretaries"
+          })
+          n.save((err)=>{})
+          res.json(data)}
     })
 })
  ////////////////////////////////////////////////////////////////login 

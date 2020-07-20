@@ -148,7 +148,6 @@ router.post('/existEmail',async(req,res)=>{
 }
 })
 
-
 module.exports = router;
 
 
