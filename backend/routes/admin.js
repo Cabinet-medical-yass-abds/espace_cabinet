@@ -156,6 +156,21 @@ router.post('/existEmail',async(req,res)=>{
 }
 })
 
+/////////////////// get All notifications 
+router.get('/getNotif/:id',async (req,res) => {
+  try {
+    var notifs = await notif.find({id_user : req.params.id})
+    var adminnotif = await notif.find({admin : true})
+    if(req.params.id  == "0"){
+      res.json(adminnotif)
+    }else{
+      res.json(notifs)
+    }
+  } catch (ex) {
+    console.log('error',ex)
+  }
+})
+
 module.exports = router;
 
 
