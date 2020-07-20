@@ -170,6 +170,25 @@ router.get('/getNotif/:id',async (req,res) => {
     console.log('error',ex)
   }
 })
+/////////////////// update notifications 
+router.get('/updateNotifAdmin',async (req,res) => {
+  try {
+    var adminnotif = await notif.updateMany({admin : true , new : true },{new : false})
+    res.json(adminnotif)
+  } catch (ex) {
+    console.log('error',ex)
+  }
+})
+
+
+router.get('/updateNotif/:id',async (req,res) => {
+  try {
+    var notifs = await notif.updateMany({id_user : req.params.id , new : true },{new : false})
+    res.json(notifs)
+  } catch (ex) {
+    console.log('error',ex)
+  }
+})
 
 module.exports = router;
 
