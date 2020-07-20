@@ -17,11 +17,12 @@ router.get('/listAll', (req, res) => {
 })
 
 router.get('/acceptDoctor/:id', (req, res,) => {
-  doctor.findByIdAndUpdate({_id : req.params.id},{accepted : true},(err)=>{
+  doctor.findByIdAndUpdate({_id : req.params.id},{accepted : true},{new : true},(err,data)=>{
     if (err) {
       console.log(err)
     }else{
-    res.json('doctor removed !!')
+      console.log(data)
+    res.json('doctor updated !!')
     }
   })
 })

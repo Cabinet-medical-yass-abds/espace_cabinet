@@ -52,9 +52,8 @@ export class DoctorsComponent implements OnInit {
   }
 
   accept(id_doctor) {
-    this.admin.acceptDoctor(id_doctor).subscribe(() => {
-      this.loadAllDoctors();
-    })
+    this.admin.acceptDoctor(id_doctor).subscribe(() => {})
+    this.loadAllDoctors();
   }
 
 }
