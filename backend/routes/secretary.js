@@ -1,5 +1,4 @@
 const router = require('express').Router()
-
 const secrt = require('../models/secretere')
 const doctor = require('../models/doctor')
 const user = require ('../models/user')

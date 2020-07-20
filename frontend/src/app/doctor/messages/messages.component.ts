@@ -26,7 +26,6 @@ export class MessagesComponent implements OnInit {
   }
   getDoctorMessages() {
     this.doctor.GetDoctorMessages(this.myDoctor._id).subscribe((data: message []) => {
-      console.log('dataaa messages:',data);
       this.myMessages = data;
       if (data.length == 0) {
         this.notFound;
@@ -35,8 +34,6 @@ export class MessagesComponent implements OnInit {
   }
 
   AnswerPatient(f: NgForm,id_message) {
-    console.log(f.value); 
-    console.log('id_message:',id_message);
     this.doctor.DoctorAnswerPatient(f.value,id_message).subscribe(() => {
       this.getDoctorMessages();
     });

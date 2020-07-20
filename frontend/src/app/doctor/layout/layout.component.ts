@@ -3,6 +3,8 @@ import { DoctorService } from '../doctor.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { doctor } from 'src/app/doctor.model';
 import { NgForm } from '@angular/forms';
+import { AdminService } from '../../admin/admin.service';
+import { notif } from 'src/app/notif.model';
 declare var $: any;
 
 @Component({
@@ -17,10 +19,13 @@ export class LayoutDoctorComponent implements OnInit {
   doctor_name;
   myDoctor: doctor;
   alert;
+  notifs : notif[];
+  new_notifs = 0;
   constructor(
     private doctor : DoctorService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private admin:AdminService) { }
 
   ngOnInit(): void {
     $("#menu-toggle").click(function(e) {
@@ -29,9 +34,27 @@ export class LayoutDoctorComponent implements OnInit {
     });
     this.myDoctor =  JSON.parse(localStorage.getItem('doctor'));  
     this.doctor_name = this.myDoctor.nom;
+    this.loadAllNotifs();
   }
   logout() {
     localStorage.clear();
+  }
+  loadAllNotifs() {
+    this.admin.getNotifsById(this.myDoctor._id).subscribe((data: notif []) => {
+      this.notifs = data;
+      data.forEach(element => {
+        if (element.new) {
+          this.new_notifs ++;
+        }
+      });
+    });
+  }
+
+  UpdateNotif() {
+    this.admin.updateNotifById(this.myDoctor._id).subscribe((data: notif []) => {
+      this.loadAllNotifs();
+      this.new_notifs = 0;
+    });
   }
 
   onUpdateDoctor(f:NgForm) {
@@ -51,16 +74,5 @@ export class LayoutDoctorComponent implements OnInit {
     }
     
   }
-  // getDoctorById() {
-  //   this.route.params.subscribe(params => {
-  //     console.log(params) //log the entire params object
-  //     console.log(params['id']) //log the value of id
-  //     this.doctor_id = params['id'];
-  //     console.log('soorage name doctor',localStorage.getItem('doctor_name'));
-  //     this.doctor.getDoctorById(this.doctor_id).subscribe((data: any) => {
-  //       console.log('data:',data);
-  //     })
-  //   });
-  // }
 
 }

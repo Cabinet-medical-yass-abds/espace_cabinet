@@ -24,7 +24,6 @@ export class AppoisComponent implements OnInit {
   loadAllAppointments() {
     this.doctor.getAllAppointments(this.id_doctor).subscribe((data: appois[]) => {
       this.appois = data;
-      console.log('my  this.appois', this.appois);
     });
   }
 }

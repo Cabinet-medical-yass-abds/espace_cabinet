@@ -36,7 +36,6 @@ export class SecretariesDoctorComponent implements OnInit {
   loadAllSecretaries() { 
     this.doctor.listSecWitoutDoc().subscribe((data: secretary []) => {
       this.secretaries = data;
-      console.log('secretaries:',data);
       if (data.length > 0) {
         this.emptyBool = false;
       }else{
@@ -46,7 +45,6 @@ export class SecretariesDoctorComponent implements OnInit {
   }
   getDoctorById() {
     this.doctor.getDoctorById(this.doc_id).subscribe((data: any) => {
-      console.log('data:',data);
       localStorage.setItem('doctor', JSON.stringify(data)); 
     })
   }
@@ -54,7 +52,6 @@ export class SecretariesDoctorComponent implements OnInit {
    // Click to show secretary informations 
    SecretaryInfo(Secretary) {
     this.mySecretary = Secretary;
-    console.log('this.mySecretary:',this.mySecretary);
   }
 
   hire(sec_id , id_doc){
@@ -73,15 +70,5 @@ export class SecretariesDoctorComponent implements OnInit {
     });
   }
 
-
-  /*  onSubmit(f: NgForm) {
-    console.log(f.value); 
-    this.route.params.subscribe(params => {
-      console.log(params['id']) //log the value of id
-      // this.doctor.addSecretary(f.value,this.id_doctor).subscribe(() => {
-      //   $('#addSecretary').modal('hide');
-      // })
-    });
-  } */
 
 }

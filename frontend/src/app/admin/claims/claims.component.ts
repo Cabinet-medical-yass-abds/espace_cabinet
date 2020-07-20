@@ -23,7 +23,6 @@ export class ClaimsComponent implements OnInit {
   loadAllClaims() {
     this.admin.getAllClaims().subscribe((data: claim []) => {
       this.claims = data;
-      console.log('Claims:',data);
       if (data.length > 0) {
         this.emptyBool = false;
       }else{
@@ -34,8 +33,6 @@ export class ClaimsComponent implements OnInit {
 
   // Answer claim
   onSubmit(f: NgForm,id_claim) {
-    console.log(f.value); 
-    console.log('id_claim:',id_claim);
     this.admin.answerClaim(f.value,id_claim).subscribe(() => {
       this.loadAllClaims();
     });

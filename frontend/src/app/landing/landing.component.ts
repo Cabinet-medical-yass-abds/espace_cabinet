@@ -26,7 +26,6 @@ export class LandingComponent implements OnInit {
   }
 
   onSubmitAdmin(f: NgForm) {
-    console.log('f.value', f.value);
     if (f.value.emailAdmin != this.emailAdmin) {
       this.alertMessageAdmin = 'Email est incorrecte';
     } else if (f.value.passwordAdmin != this.passwordAdmin) {
@@ -40,7 +39,6 @@ export class LandingComponent implements OnInit {
   ////////////////////////////////////////////////DOC auth
   onSubmitDoctor(f: NgForm) {
     this.doctor.LoginDoctor(f.value).subscribe((data: any) => {
-      console.log('data', data);
       if (data._id != undefined) {
         $('#LoginDoctor').modal('hide');
         localStorage.setItem('doctor', JSON.stringify(data));
@@ -52,15 +50,11 @@ export class LandingComponent implements OnInit {
   }
 
   onSubmitDoctorRegister(f: NgForm) {
-    console.log('f.value', f.value);
-    console.log('f.value', f.value);
     this.admin.checkExistEmail(f.value).subscribe((data: any) => {
-      console.log('dataaaaa:', data);
       if (data.doc) {
         this.alertEmailExistDoctor = 'Email existant';
       } else {
         this.doctor.RegisterDoctor(f.value).subscribe((data: any) => {
-          console.log('data', data);
           if (data._id != undefined) {
             $('#RegisterDoctor').modal('hide');
             localStorage.setItem('doctor', JSON.stringify(data));
@@ -77,7 +71,6 @@ export class LandingComponent implements OnInit {
 
   ////////////////////////////////////////////////SECR auth
   onSubmitSec(f: NgForm) {
-    console.log('f.value', f.value);
     this.sec.loginSec(f.value).subscribe((data: any) => {
       if (data._id != undefined) {
         $('#LoginSec').modal('hide');
@@ -91,7 +84,6 @@ export class LandingComponent implements OnInit {
 
   onSubmitSecRegister(f: NgForm) {
     this.admin.checkExistEmail(f.value).subscribe((data: any) => {
-      console.log('dataaaaa:', data);
       if (data.secretary) {
         this.alertEmailSecretary = 'Email existant';
       } else {

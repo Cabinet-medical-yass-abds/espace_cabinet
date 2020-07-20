@@ -21,15 +21,12 @@ export class HomeSecComponent implements OnInit {
 
   
   updateProfile(myid , f: NgForm ){
-    console.log(myid)
-    console.log(f.value)
     if (f.value.newPassword != '') {
       f.value.password = f.value.newPassword;
     }
     delete f.value.newPassword;
     if (f.value.password != '') {
       this.sec.UpdateSec(myid, f.value).subscribe((data : any)=>{
-        console.log(data)
         localStorage.setItem('secretary', JSON.stringify(data));
         $('#updateSec').modal('hide');
         window.location.reload()

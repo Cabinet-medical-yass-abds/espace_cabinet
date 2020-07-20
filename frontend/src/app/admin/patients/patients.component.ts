@@ -28,7 +28,6 @@ export class PatientsComponent implements OnInit {
       }else{
         this.emptyBool = true;
       }
-      console.log('patients:',data);
     })
   }
 

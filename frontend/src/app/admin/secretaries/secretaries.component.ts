@@ -26,7 +26,6 @@ export class SecretariesComponent implements OnInit {
   loadAllSecretaries() {
     this.admin.getAllSecretaries().subscribe((data: secretary []) => {
       this.secretaries = data;
-      console.log('secretaries:',data);
       if (data.length > 0) {
         this.emptyBool = false;
       }else{
@@ -38,7 +37,6 @@ export class SecretariesComponent implements OnInit {
   // Click to show doctor informations 
   SecretaryInfo(Secretary) {
     this.mySecretary = Secretary;
-    console.log('this.mySecretary:',this.mySecretary);
   }
 
    // Delete secretary by id

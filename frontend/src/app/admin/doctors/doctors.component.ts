@@ -30,7 +30,6 @@ export class DoctorsComponent implements OnInit {
   loadAllDoctors() {
     this.admin.getAlldoctors().subscribe((data: doctor []) => {
       this.ad = data;
-      console.log('Dotors:',data);
       if (data.length > 0) {
         this.emptyBool = false;
       }else{
@@ -42,7 +41,6 @@ export class DoctorsComponent implements OnInit {
   // Click to show doctor informations 
   doctorInfo(doctor) {
     this.mydoctor = doctor;
-    console.log('this.mydoctor:',this.mydoctor);
   }
 
   // Delete doctor by id
@@ -54,7 +52,6 @@ export class DoctorsComponent implements OnInit {
   }
 
   accept(id_doctor) {
-    console.log('id_doctor:',id_doctor);
     this.admin.acceptDoctor(id_doctor).subscribe(() => {
       this.loadAllDoctors();
     })

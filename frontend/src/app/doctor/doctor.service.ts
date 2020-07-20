@@ -74,7 +74,6 @@ export class DoctorService {
   }
 
   AddfileConsultation(file,id_consultation) {
-    console.log('my file:',file);
     return this.http.post(`${this.url}/updateConsul/`+id_consultation,file);
   }
 

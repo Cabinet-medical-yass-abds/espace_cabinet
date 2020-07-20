@@ -37,31 +37,26 @@ export class ConsultationsComponent implements OnInit {
   //Get consultations ( not archived )
   loadAllConsultations() {
     this.doctor.getAllConsultations(this.id_doctor).subscribe((data: consultation []) => {
-      console.log('dataaa consultations :',data);
       this.myConsultations = data;
     });
   }
 
   // Archive consultation 
   archive(id_consultation) {
-    console.log('id_consultation',id_consultation);
     this.doctor.archiveConsultation(id_consultation).subscribe(() => {
       this.loadAllConsultations();
     });
   }
   // Get consultation Id 
   getConstId(id_cons) {
-    console.log('id_cons:',id_cons);
     this.id_const = id_cons;
   }
 
   onFileSelected(event) {
-    console.log('event.target.files[0]:',event.target.files[0]);
     this.myFile = event.target.files[0];
     this.uploadForm.get('file').setValue(this.myFile);
   }
   onSubmit(id_const) {
-    console.log(' this.uploadForm:', this.uploadForm.get('file').value);
     this.formData.append('file', this.uploadForm.get('file').value);
     this.doctor.AddfileConsultation(this.formData,id_const).subscribe(() => {
       this.loadAllConsultations();

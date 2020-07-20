@@ -50,7 +50,6 @@ export class DashboardComponent implements OnInit {
   }
   loadAllAppointments() {
     this.admin.getAllappois().subscribe((data: appois []) => {
-      console.log('data',data);
       data.forEach(appoi => {
         if (appoi.statue) {
           this.acceptedAppoi ++; 

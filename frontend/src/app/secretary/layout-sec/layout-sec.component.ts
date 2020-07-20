@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AdminService } from '../../admin/admin.service';
+import { notif } from 'src/app/notif.model';
 declare var $: any;
 @Component({
   selector: 'app-layout-sec',
@@ -7,13 +9,14 @@ declare var $: any;
 })
 export class LayoutSecComponent implements OnInit {
 
-  constructor() { }
+  constructor(private admin:AdminService) { }
   Secretary;
   name;
   myid;
+  notifs : notif[];
+  new_notifs = 0;
   ngOnInit(): void {
     $("#menu-toggle").click(function(e) {
-      console.log('im here');
       e.preventDefault();
       $("#wrapper").toggleClass("toggled");
     });
@@ -21,6 +24,25 @@ export class LayoutSecComponent implements OnInit {
     this.Secretary =  JSON.parse(localStorage.getItem('secretary'));  
     this.name = this.Secretary.nom;
     this.myid = this.Secretary._id;
+    this.loadAllNotifs();
+  }
+
+  loadAllNotifs() {
+    this.admin.getNotifsById(this.Secretary._id).subscribe((data: notif []) => {
+      this.notifs = data;
+      data.forEach(element => {
+        if (element.new) {
+          this.new_notifs ++;
+        }
+      });
+    });
+  }
+
+  UpdateNotif() {
+    this.admin.updateNotifById(this.Secretary._id).subscribe((data: notif []) => {
+      this.loadAllNotifs();
+      this.new_notifs = 0;
+    });
   }
 
 }

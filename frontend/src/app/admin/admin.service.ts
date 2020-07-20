@@ -15,7 +15,6 @@ export class AdminService {
   }
 
   deleteDoctor(id) {
-    console.log('id doctor service',id);
     return this.http.get(`${this.url}/delete/`+id);
   }
 
@@ -71,6 +70,22 @@ export class AdminService {
 
   checkExistEmail(data) {
     return this.http.post(`${this.url}/existEmail`,data);
+  }
+
+  getAllNotifs() {
+    return this.http.get(`${this.url}/getNotif/0`);
+  }
+
+  UpdateNotif() {
+    return this.http.get(`${this.url}/updateNotifAdmin`);
+  }
+
+  getNotifsById(id) {
+    return this.http.get(`${this.url}/getNotif/`+id);
+  }
+  
+  updateNotifById(id) {
+    return this.http.get(`${this.url}/updateNotif/`+id);
   }
 
 }

@@ -13,6 +13,7 @@ export class AcceptedRVComponent implements OnInit {
   myid;
   RV_id;
   HerDocId;
+  count_accepted = 0;
   ngOnInit(): void {
     this.Secretary =  JSON.parse(localStorage.getItem('secretary'));  
     this.myid = this.Secretary._id;
@@ -23,7 +24,12 @@ export class AcceptedRVComponent implements OnInit {
   myRV;
   listOwnRv(HerDocId){
     this.sec.ListRv(HerDocId).subscribe((data: any)=>{
-      this.myRV = data
+      this.myRV = data;
+      this.myRV.forEach(element => {
+        if (element.statue) {
+          this.count_accepted ++;
+        }
+      });
     })
   }
   

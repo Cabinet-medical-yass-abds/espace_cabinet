@@ -25,7 +25,6 @@ export class CaisseComponent implements OnInit {
     this.myDoctor =  JSON.parse(localStorage.getItem('doctor'));
     this.id_doc = this.myDoctor._id
     this.doctor.GetAllConsultations(this.id_doc).subscribe((data: any)=> {
-      console.log('testtt:',data);
       this.CountAllconsultations = data.length;
       this.sommeT = 0 ;
       data.forEach(element => {
@@ -35,18 +34,15 @@ export class CaisseComponent implements OnInit {
   }
 
   getCaissePerdate(id,f : NgForm ){
-    console.log('f.value',f.value);
     this.dateD = f.value.dateD+'T00:00:00.000+00:00';
     this.dateF = f.value.dateF+'T23:59:59.000+00:00';
     this.doctor.listPayment(id , this.dateD,this.dateF).subscribe((data : any)=>{
-      console.log(data)
       this.myConsultations = data;
       this.lengthConsultations = data.length;
       this.somme = 0 ;
       data.forEach(element => {
         this.somme += element.id_appointment.prix
       }); 
-      console.log('somme:',this.somme);
     })
   }
 }
