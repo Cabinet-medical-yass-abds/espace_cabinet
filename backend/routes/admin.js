@@ -4,6 +4,7 @@ const secretere = require('../models/secretere');
 const user = require('../models/user');
 const claim = require('../models/claim')
 const appointement = require('../models/appointement')
+const notif = require('../models/notif')
 
 //////////////////////////////////////////////////////////// Doctors crud
 router.get('/listAll', (req, res) => {
@@ -94,10 +95,17 @@ router.get('/listclaim',(req,res)=>{
 })
 
 router.post('/answerclaim/:id',(req,res)=>{
-  claim.findByIdAndUpdate({_id : req.params.id},{answer : req.body.answer},(err)=>{
+  claim.findByIdAndUpdate({_id : req.params.id},{answer : req.body.answer},(err,data)=>{
     if (err) {
       console.log(err)
     }else{
+      var n = new notif ({
+        id_user : data.id_patient,
+        patient  :true ,
+        body : "L'administrateur a répondre votre reclamation",
+        url : "http://localhost:4000/mesREC/"+data.id_patient
+      })
+      n.save((err)=>{})
       res.json('claim answered !!')
     }
   })

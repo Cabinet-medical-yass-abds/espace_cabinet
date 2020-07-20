@@ -126,8 +126,15 @@ router.post('/answerMsg/:id',(req,res)=>{
         fromPatient : false
       }}
   },(err,data)=>{
+    var n = new notif ({
+      id_user : data.id_patient,
+      patient  :true ,
+      body : "Le docteur "+data.id_doctor.nom+" a repondre a votre messages",
+      url : "http://localhost:4000/listmsg/"+data.id_patient
+    })
+    n.save((err)=>{})
     res.json('message envoyé')
-  })
+  }).populate('id_doctor')
 })
 
 
@@ -205,9 +212,16 @@ router.post('/updateConsul/:id_cons',upload.single('file'),(req,res)=>{
       {
         file : myFileName}
       }
-  },(err,results)=>{
-      res.json('File added !')
-  })
+  },(err,data)=>{
+    var n = new notif ({
+      id_user : data.id_patient,
+      patient  :true ,
+      body : "Le docteur "+data.id_doctor.nom+" a diposer un nouvau ficher médicale",
+      url : "http://localhost:4000/dossier/"+data.id_patient
+    })
+    n.save((err)=>{})
+    res.json('File added !')
+  }).populate('id_doctor')
 })
 
 router.get('/deleteConsult/:id',(req,res)=>{

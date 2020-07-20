@@ -4,6 +4,7 @@ const secrt = require('../models/secretere')
 const doctor = require('../models/doctor')
 const user = require ('../models/user')
 const appointement =require('../models/appointement')
+const notif =require('../models/notif')
 
 ////////////////////////////////////////////////////////////////Register
 router.post('/registerSec',(req,res)=>{
@@ -80,7 +81,14 @@ router.post('/acceptRv/:id',(req,res)=>{
     appointement.findByIdAndUpdate({_id : req.params.id},{
         prix : req.body.prix,
         statue : true
-    },(err)=>{
+    },(err,data)=>{
+        var n = new notif ({
+            id_user : data.id_patient,
+            patient  :true ,
+            body : "Votre rendez vous a été accepté",
+            url : "http://localhost:4000/mesRV/"+data.id_patient
+          })
+        n.save((err)=>{})
         res.json('Rendez vous accepté')
     })
 })
@@ -89,7 +97,14 @@ router.post('/acceptRv/:id',(req,res)=>{
 router.get('/cancelRv/:id',(req,res)=>{
     appointement.findByIdAndUpdate({_id : req.params.id},{
         cancel : true
-    },(err)=>{
+    },(err,data)=>{
+        var n = new notif ({
+            id_user : data.id_patient,
+            patient  :true ,
+            body : "Votre rendez vous a été réfuser",
+            url : "http://localhost:4000/mesRV/"+data.id_patient
+          })
+        n.save((err)=>{})
         res.json('Rendez vous annulé')
     })
 })
